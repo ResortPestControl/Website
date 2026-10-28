@@ -552,7 +552,8 @@ const contact = {
 </div>
 <form class="portal-box" method="post" action="${SITE.formEndpoint}">
 <h2>Request service</h2>
-<input type="hidden" name="source" value="website-contact">
+<p class="form-error" id="form-error" hidden>Sorry, that didn't go through. Please check your name and email, or call us at ${tel}.</p>
+<script>if (/[?&]error=1/.test(location.search)) document.getElementById("form-error").hidden = false;</script>
 <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Leave this empty <input name="company_website" tabindex="-1" autocomplete="off"></label></p>
 <div class="fields">
 <label>First name*<input name="first_name" required autocomplete="given-name"></label>

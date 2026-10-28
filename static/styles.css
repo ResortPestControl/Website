@@ -170,3 +170,4 @@ details p { margin: .7em 0 0; color: var(--ink-2); }
 .fields input, .fields select, .fields textarea { font: 1rem var(--sans); padding: 10px 12px; border: 1px solid var(--rule, #c2b8a6); border-radius: 8px; background: #fff; color: var(--ink); }
 .fields input:focus, .fields select:focus, .fields textarea:focus { outline: 2px solid var(--green-2); outline-offset: 1px; }
 @media (max-width: 520px) { .fields { grid-template-columns: 1fr; } }
+.form-error { background: #fbe9e7; border: 1px solid #e0a59a; color: #8f2a15; padding: 10px 12px; border-radius: 8px; }
