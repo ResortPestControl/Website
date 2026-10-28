@@ -53,7 +53,15 @@ function buildingLabels() {
 const outlines = (stroke = "rgba(255,255,255,.9)") =>
   BUILDINGS.map((b) => `<polygon points="${pts(corners(b))}" fill="rgba(231,232,235,.18)" stroke="${stroke}" stroke-width="2.5"/>`).join("");
 
-function figure({ id, title, description, svg, legend, alt }) {
+function figure({ id, title, description, svg, legend, alt }, compact = false) {
+  if (compact) {
+    return `<figure class="mapcard compact"><div class="mapfig">
+<img src="/img/property-map.webp" srcset="/img/property-map-380.webp 380w, /img/property-map.webp 760w" sizes="(max-width: 860px) 100vw, 560px" width="${W}" height="${H}" alt="${alt}" loading="lazy">
+<svg viewBox="0 0 ${W} ${H}" aria-hidden="true" font-family="system-ui,sans-serif">${svg}</svg>
+<figcaption>${title} · sample property</figcaption>
+</div>
+<ul class="legend">${legend.map(([sw, label]) => `<li>${sw}<span>${label}</span></li>`).join("")}</ul></figure>`;
+  }
   return `<figure class="mapcard" id="${id}">
 <div class="mapcard-text">
 <h3>${title}</h3>
@@ -71,7 +79,7 @@ function figure({ id, title, description, svg, legend, alt }) {
 const sw = (inner) => `<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">${inner}</svg>`;
 
 /* ---------------------------------------------------------------- barrier */
-export function barrierMap() {
+export function barrierMap(compact = false) {
   const interior = new Set([1, 4]); // buildings with interior service this visit
   const svg = [
     BUILDINGS.map((b, i) => (interior.has(i) ? `<polygon points="${pts(corners(b))}" fill="rgba(46,160,67,.38)"/>` : "")).join(""),
@@ -91,7 +99,7 @@ export function barrierMap() {
       [sw(`<rect x="3" y="3" width="16" height="16" rx="2" fill="rgba(46,160,67,.45)" stroke="#fff" stroke-width="1.5"/>`), "Interior treated this visit"],
       [sw(`<rect x="3" y="3" width="16" height="16" rx="2" fill="#cfd2d8" stroke="#fff" stroke-width="2"/>`), "Building outline"],
     ],
-  });
+  }, compact);
 }
 
 /* ----------------------------------------------------------------- rodent */
@@ -115,7 +123,7 @@ function lidPath(x, y, deg, scale = 1.45) {
   return pts(shape.map(([a, b]) => [x + a * c - b * s, y + a * s + b * c]));
 }
 
-export function rodentMap() {
+export function rodentMap(compact = false) {
   let n = 0;
   // A station off each corner, plus one along the long front wall of the bigger buildings.
   const stations = BUILDINGS.flatMap((b, i) => {
@@ -143,11 +151,11 @@ export function rodentMap() {
     alt: "Aerial map of six condo buildings with numbered rodent bait stations colored by feeding activity",
     svg,
     legend: LEVEL.map(([fill, , label]) => [sw(`<polygon points="${lidPath(11, 11, 0, 0.75)}" fill="${fill}" stroke="#fff" stroke-width="1.5" transform="translate(0,0)"/>`), label]),
-  });
+  }, compact);
 }
 
 /* ---------------------------------------------------------------- termite */
-export function termiteMap() {
+export function termiteMap(compact = false) {
   const live = new Set([9, 10]);
   const noAccess = new Set([31]);
   let n = 0;
@@ -177,7 +185,7 @@ export function termiteMap() {
       [sw(`<circle cx="11" cy="11" r="9" fill="none" stroke="#c62828" stroke-width="2.5"/><circle cx="11" cy="11" r="5" fill="#c62828" stroke="#fff" stroke-width="1.5"/>`), "Live termite activity"],
       [sw(`<circle cx="11" cy="11" r="6.5" fill="#d8d3c8" stroke="#7b7468" stroke-width="1.5" stroke-dasharray="3 2.5"/>`), "Could not access"],
     ],
-  });
+  }, compact);
 }
 
 /* ------------------------------------------------------- service area map */

@@ -76,12 +76,12 @@ const home = {
 <section class="block alt"><div class="wrap split">
 <div>
 <div class="eyebrow">Mapping &amp; reporting</div>
-<h2>See every bait station on a map of your property</h2>
-<p>We map each building and every rodent station on your property. At every visit our technician records what each station shows, and your report colors the map so you can see at a glance where activity is and whether it's going down.</p>
-<ul class="checks"><li>Numbered stations on an aerial map of your property</li><li>Activity levels recorded at every visit</li><li>Reports and the map available in your customer portal</li></ul>
+<h2>See every treatment and station on a map of your property</h2>
+<p>We map each building on your property. At every visit our technician records where the barrier treatment went and what each rodent and termite station shows, and your report puts it all on the map so you can see at a glance what was done and where activity is.</p>
+<ul class="checks"><li>Barrier treatment map</li><li>Rodent station map with feeding levels</li><li>Termite station map with live activity flagged</li><li>Reports and maps in your customer portal</li></ul>
 <div class="actions"><a class="btn green" href="/mapping/">How mapping works</a><a class="btn ghost" href="${SITE.portalDemo}">Try the live demo</a></div>
 </div>
-<div>${rodentMap()}</div>
+<div>${rodentMap(true)}</div>
 </div></section>
 
 <section class="block"><div class="wrap split">
@@ -179,7 +179,10 @@ const pestControl = servicePage({
     "Free retreat if live pests appear inside between residential services",
   ],
   sections: `<h2>Pests we treat</h2>
-<p>Ants (including ghost ants, white-footed ants and fire ants), cockroaches, spiders, silverfish, earwigs, millipedes, centipedes, pantry pests and more. Not sure what you're seeing? Our <a href="/pests/">pest identification guide</a> can help.</p>`,
+<p>Ants (including ghost ants, white-footed ants and fire ants), cockroaches, spiders, silverfish, earwigs, millipedes, centipedes, pantry pests and more. Not sure what you're seeing? Our <a href="/pests/">pest identification guide</a> can help.</p>
+<h2>Every barrier treatment, on the map</h2>
+<p>For communities and commercial properties, each visit's report shows exactly which buildings got the perimeter barrier and which had interior service. <a href="/mapping/#barrier-map">See how our maps work</a>.</p>
+${barrierMap(true)}`,
   faqItems: [
     ["How often should my home be serviced?", "Most Southwest Florida homes do best with regular quarterly service. We'll recommend a schedule after your first inspection."],
     ["Are your treatments safe for kids and pets?", "We use integrated pest management and environmentally responsible products, applied only where needed. Your technician will tell you if anything should be kept away from treated areas and for how long."],
@@ -205,7 +208,7 @@ const rodentControl = servicePage({
   ],
   sections: `<h2>See your stations on a map</h2>
 <p>For communities and commercial properties, we draw your buildings and every bait station on an aerial map. Each visit's readings color the map by activity level, so managers and boards can see exactly where rodents are active and how the numbers change over time. <a href="/mapping/">Learn how our mapping works</a>.</p>
-${rodentMap()}`,
+${rodentMap(true)}`,
   faqItems: [
     ["What are the signs of rats in my home?", "Droppings, gnaw marks on wiring or food packaging, greasy rub marks along walls, chewed fruit outdoors and scratching or running noises in the attic at night."],
     ["Are bait stations safe around pets and children?", "We use locked, tamper-resistant stations designed so bait can be reached by rodents but not by children, pets or wildlife."],
@@ -229,7 +232,10 @@ const termiteControl = servicePage({
   ],
   sections: `<h2>Signs of termites</h2>
 <ul><li>Swarms of winged insects indoors, often in spring</li><li>Discarded wings near windows and doors</li><li>Mud tubes on foundations or walls</li><li>Small piles of pellet-like droppings below wood</li><li>Wood that sounds hollow or blisters</li></ul>
-<p>Seeing any of these? <a href="/contact/">Request a termite inspection</a>.</p>`,
+<p>Seeing any of these? <a href="/contact/">Request a termite inspection</a>.</p>
+<h2>Termite stations on your map</h2>
+<p>For communities and commercial properties, every in-ground termite station is pinned on a map of your property and inspected on schedule. Any live activity is flagged in red on your report. <a href="/mapping/#termite-map">See how our maps work</a>.</p>
+${termiteMap(true)}`,
 });
 
 const condo = {
@@ -255,7 +261,7 @@ const condo = {
 <li>One portal for managers who look after several properties</li>
 </ul>
 </div>
-<div>${rodentMap()}</div>
+<div>${rodentMap(true)}</div>
 </div></section>
 
 <section class="block alt"><div class="wrap">
