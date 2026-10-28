@@ -4,7 +4,7 @@ import { SITE } from "./site.mjs";
 
 const tel = `<a href="tel:${SITE.phoneE164}">${SITE.phone}</a>`;
 
-const ctaBand = (heading = "Ready for a pest-free property?", text = "Call our Naples office or send a request and we'll get back to you the same business day.") => `
+const ctaBand = (heading = "Ready for a pest-free property?", text = "Call our office or send a request and we'll get back to you the same business day.") => `
 <section class="cta-band"><div class="wrap">
 <div><h2>${heading}</h2><p>${text}</p></div>
 <div class="actions" style="margin:0"><a class="btn" href="tel:${SITE.phoneE164}">Call ${SITE.phone}</a><a class="btn ghost" style="color:#fff!important;border-color:#fff" href="/contact/">Request service</a></div>
@@ -12,7 +12,7 @@ const ctaBand = (heading = "Ready for a pest-free property?", text = "Call our N
 
 const asideBox = `<aside class="aside"><div class="portal-box">
 <h3>Talk to our team</h3>
-<p>Family-owned in Naples for over 30 years. Licensed, state-certified technicians.</p>
+<p>Family-owned in Southwest Florida for over 30 years. Licensed, state-certified technicians.</p>
 <p><a class="btn" href="tel:${SITE.phoneE164}" style="display:block;text-align:center">Call ${SITE.phone}</a></p>
 <p style="margin:0"><a class="btn ghost" href="/contact/" style="display:block;text-align:center">Request service online</a></p>
 </div>
@@ -58,20 +58,20 @@ const homeFaq = faq([
 
 const home = {
   path: "/",
-  title: "Pest Control in Naples, FL | Resort Pest Control",
+  title: "Southwest Florida Pest Control, Naples to Fort Myers | Resort Pest Control",
   description:
-    "Family-owned pest control in Naples & Southwest Florida for 30+ years. Condos, HOAs, businesses and homes. Rodent stations mapped and reported every visit.",
+    "Family-owned pest control in Southwest Florida for 30+ years, serving Lee and Collier counties. Condos, HOAs, businesses and homes. Rodent stations mapped and reported every visit.",
   schema: [homeFaq.schema],
   body: `
 <section class="hero"><div class="wrap grid">
 <div>
 <div class="eyebrow">Southwest Florida · Lee &amp; Collier counties</div>
-<h1>Pest control for Naples communities, businesses and homes</h1>
-<p class="lede">Resort Pest Control is a family-owned Naples company that has protected Southwest Florida properties for over 30 years. We specialize in condominiums, HOAs and clubs, and we bring the same care to every home.</p>
+<h1>Pest control for Southwest Florida communities, businesses and homes</h1>
+<p class="lede">Resort Pest Control is a family-owned Southwest Florida company that has protected Southwest Florida properties for over 30 years. We specialize in condominiums, HOAs and clubs, and we bring the same care to every home.</p>
 <div class="actions"><a class="btn" href="tel:${SITE.phoneE164}">Call ${SITE.phone}</a><a class="btn ghost" href="/contact/">Request a free quote</a></div>
 </div>
 <div class="hero-card">
-<h2 style="font-size:1.3rem">Why Naples properties choose us</h2>
+<h2 style="font-size:1.3rem">Why Southwest Florida properties choose us</h2>
 <ul class="checks">
 <li>Family-owned and local for over 30 years</li>
 <li>Licensed, state-certified technicians</li>
@@ -109,7 +109,7 @@ const home = {
 <p>Spraying alone doesn't solve pest problems in Southwest Florida's climate. We follow integrated pest management (IPM): find out which pests you have and why, remove what attracts them, keep them out, and treat precisely where it matters.</p>
 <div class="stats">
 <div class="stat"><b>30+ years</b><span>serving Southwest Florida</span></div>
-<div class="stat"><b>Family</b><span>owned and operated in Naples</span></div>
+<div class="stat"><b>Family</b><span>owned and operated in Southwest Florida</span></div>
 <div class="stat"><b>Licensed</b><span>state-certified technicians</span></div>
 </div>
 </div>
@@ -130,12 +130,12 @@ ${ctaBand()}`,
 
 const services = {
   path: "/services/",
-  title: "Pest Control Services in Naples, FL",
+  title: "Pest Control Services in Southwest Florida",
   h1: "Pest control services",
   crumbs: [],
   lede: "Residential and commercial pest control across Southwest Florida, Lee and Collier counties, built on integrated pest management.",
   description:
-    "Pest, rodent and termite control for communities, businesses and homes in Naples, Fort Myers and Southwest Florida from a family-owned company with 30+ years in Southwest Florida.",
+    "Pest, rodent and termite control for communities, businesses and homes across Southwest Florida from a family-owned company with 30+ years in Lee and Collier counties.",
   body: `
 <section class="block"><div class="wrap">
 <div class="cards">
@@ -182,11 +182,11 @@ ${ctaBand()}`,
 
 const pestControl = servicePage({
   slug: "pest-control",
-  title: "Home & Condo Pest Control in Naples, FL",
+  title: "Home & Condo Pest Control in Southwest Florida",
   h1: "General pest control",
   lede: "Year-round protection from ants, cockroaches, spiders and other Southwest Florida pests.",
   description:
-    "Interior and exterior pest control with a perimeter barrier for Naples homes and condos. Free retreats if pests come back inside. Call (239) 352-4100.",
+    "Interior and exterior pest control with a perimeter barrier for Southwest Florida homes and condos. Free retreats if pests come back inside. Call (239) 352-4100.",
   intro:
     "Southwest Florida's heat and humidity mean pests are active all year. Our general pest control service treats the inside and outside of your home or building and puts a protective barrier around the whole perimeter, so pests are stopped before they get in.",
   bullets: [
@@ -200,20 +200,20 @@ const pestControl = servicePage({
   sections: `<h2>Pests we treat</h2>
 <p>Ants (including ghost ants, white-footed ants and fire ants), cockroaches, spiders, silverfish, earwigs, millipedes, centipedes, pantry pests and more. Not sure what you're seeing? Our <a href="/pests/">pest identification guide</a> can help.</p>`,
   faqItems: [
-    ["How often should my home be serviced?", "Most Naples homes do best with regular quarterly service. We'll recommend a schedule after your first inspection."],
+    ["How often should my home be serviced?", "Most Southwest Florida homes do best with regular quarterly service. We'll recommend a schedule after your first inspection."],
     ["Are your treatments safe for kids and pets?", "We use integrated pest management and environmentally responsible products, applied only where needed. Your technician will tell you if anything should be kept away from treated areas and for how long."],
   ],
 });
 
 const rodentControl = servicePage({
   slug: "rodent-control",
-  title: "Rodent & Rat Control in Naples, FL",
+  title: "Rodent & Rat Control in Southwest Florida",
   h1: "Rodent control",
   lede: "Bait stations, monitoring and exclusion for roof rats and mice, with every station mapped and reported.",
   description:
-    "Rat and mouse control in Naples: tamper-resistant bait stations, exclusion and visit-by-visit station reports on a map of your property.",
+    "Rat and mouse control in Southwest Florida: tamper-resistant bait stations, exclusion and visit-by-visit station reports on a map of your property.",
   intro:
-    "Roof rats are the most common rodent problem in Naples. They live in palm trees and dense landscaping and get into attics, garages and wall voids through surprisingly small gaps. Our rodent program controls the population outside, keeps them out of the building, and tracks activity at every station so you can see results.",
+    "Roof rats are the most common rodent problem in Southwest Florida. They live in palm trees and dense landscaping and get into attics, garages and wall voids through surprisingly small gaps. Our rodent program controls the population outside, keeps them out of the building, and tracks activity at every station so you can see results.",
   bullets: [
     "Inspection for droppings, rub marks, gnawing and entry points",
     "Locked, tamper-resistant bait stations around buildings",
@@ -233,7 +233,7 @@ ${mapFigure()}`,
 
 const termiteControl = servicePage({
   slug: "termite-control",
-  title: "Termite Inspection & Treatment in Naples, FL",
+  title: "Termite Inspection & Treatment in Southwest Florida",
   h1: "Termite control",
   lede: "Inspections and treatment for the subterranean and drywood termites that damage Southwest Florida buildings.",
   description:
@@ -253,13 +253,13 @@ const termiteControl = servicePage({
 
 const condo = {
   path: "/condo-hoa-pest-control/",
-  title: "Condo & HOA Pest Control in Naples, FL",
+  title: "Condo & HOA Pest Control in Southwest Florida",
   h1: "Pest control for condos, HOAs and commercial properties",
   eyebrow: "Communities & property managers",
   lede: "Ongoing pest and rodent programs for associations, clubs and businesses, with clear reports for managers and boards.",
   crumbs: [],
   description:
-    "Pest and rodent programs for Naples condo associations, HOAs, clubs and businesses. Mapped bait stations, visit reports and an online portal for managers.",
+    "Pest and rodent programs for Southwest Florida condo associations, HOAs, clubs and businesses. Mapped bait stations, visit reports and an online portal for managers.",
   body: `
 <section class="block"><div class="wrap split">
 <div>
@@ -304,7 +304,7 @@ const mapping = {
   lede: "We map every building and bait station on your property, record activity at every visit, and show you the results on a map in your customer portal.",
   crumbs: [],
   description:
-    "See every rodent bait station on an aerial map of your property, with activity recorded each visit and reports in your online portal. Resort Pest Control, Naples.",
+    "See every rodent bait station on an aerial map of your property, with activity recorded each visit and reports in your online portal. Resort Pest Control, Southwest Florida.",
   body: `
 <section class="block"><div class="wrap split">
 <div>
@@ -356,10 +356,10 @@ const pestsIndex = {
   path: "/pests/",
   title: "Florida Pest Identification Guide",
   h1: "Pest identification guide",
-  lede: "Common pests in Naples and Southwest Florida, how to recognize them and what to do next.",
+  lede: "Common pests in Southwest Florida, how to recognize them and what to do next.",
   crumbs: [],
   description:
-    "Identify common Southwest Florida pests: ants, cockroaches, rodents, termites and more. A guide from Resort Pest Control in Naples.",
+    "Identify common Southwest Florida pests: ants, cockroaches, rodents, termites and more. A guide from Resort Pest Control.",
   body: `
 <section class="block"><div class="wrap">
 <div class="cards">
@@ -374,10 +374,10 @@ ${ctaBand("Not sure what you're seeing?", "Send us a photo or give us a call. We
 
 const ants = {
   path: "/pests/ants/",
-  title: "Common Ants in Naples & Southwest Florida",
+  title: "Common Ants in Southwest Florida",
   h1: "Ants",
   crumbs: [["/pests/", "Pest Guide"]],
-  lede: "Florida is home to dozens of ant species. These are the ones we see most often in Naples homes and buildings.",
+  lede: "Florida is home to dozens of ant species. These are the ones we see most often in Southwest Florida homes and buildings.",
   description:
     "Identify common Southwest Florida ants: ghost ants, white-footed ants, fire ants, carpenter ants and more, and learn how to get rid of them.",
   body: `<div class="wrap layout"><div class="prose" style="max-width:none">
@@ -397,7 +397,7 @@ ${ctaBand()}`,
 
 const roaches = {
   path: "/pests/cockroaches/",
-  title: "Cockroaches & Palmetto Bugs in Naples, FL",
+  title: "Cockroaches & Palmetto Bugs in Southwest Florida",
   h1: "Cockroaches",
   crumbs: [["/pests/", "Pest Guide"]],
   lede: "From outdoor \"palmetto bugs\" to German roaches that breed indoors, here's how to tell them apart.",
@@ -420,10 +420,10 @@ ${ctaBand()}`,
 
 const rodents = {
   path: "/pests/rodents/",
-  title: "Roof Rats, Norway Rats & Mice in Naples, FL",
+  title: "Roof Rats, Norway Rats & Mice in Southwest Florida",
   h1: "Rodents",
   crumbs: [["/pests/", "Pest Guide"]],
-  lede: "Roof rats are the most common rodent problem in Naples. Here's how to recognize the rodents in Southwest Florida.",
+  lede: "Roof rats are the most common rodent problem in Southwest Florida. Here's how to recognize the rodents you may see.",
   description:
     "Identify roof rats, Norway rats and house mice in Southwest Florida, the signs of an infestation and how professional rodent control works.",
   body: `<div class="wrap layout"><div class="prose" style="max-width:none">
@@ -464,12 +464,12 @@ ${ctaBand()}`,
 
 const about = {
   path: "/about/",
-  title: "About Our Family-Owned Naples Pest Control Company",
+  title: "About Our Family-Owned Southwest Florida Pest Control Company",
   h1: "About Resort Pest Control",
   lede: "Family-owned and operated, proudly serving the Southwest Florida community for over 30 years.",
   crumbs: [],
   description:
-    "Resort Pest Control is a family-owned Naples company with 30+ years serving Southwest Florida condos, HOAs, clubs, businesses and homes.",
+    "Resort Pest Control is a family-owned company with 30+ years serving Southwest Florida condos, HOAs, clubs, businesses and homes.",
   body: `
 <div class="wrap layout"><div class="prose">
 <p>For over 30 years, our family-owned and operated company has proudly served the Southwest Florida community. We know Florida's unique pest challenges, and we've built long relationships with the condominiums, homeowners associations, clubs and businesses we protect.</p>
@@ -490,9 +490,9 @@ ${ctaBand()}`,
 
 const contact = {
   path: "/contact/",
-  title: "Contact Us | Request Pest Control in Naples",
+  title: "Contact Us | Request Pest Control in Southwest Florida",
   h1: "Contact us",
-  lede: "Call our Naples office or send a request and we'll get back to you the same business day.",
+  lede: "Call our office or send a request and we'll get back to you the same business day.",
   crumbs: [],
   description:
     "Contact Resort Pest Control in Naples, FL. Call (239) 352-4100 or request a free quote online. 2685 Horseshoe Dr S, Suite 215, Naples, FL 34104.",

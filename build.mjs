@@ -94,7 +94,7 @@ function footer() {
 <li><a href="/contact/">Contact</a></li>
 <li><a href="/privacy/">Privacy</a></li></ul></div>
 </div>
-<div class="legal"><span>© ${new Date().getFullYear()} ${SITE.legalName} All rights reserved.</span><span>Licensed &amp; state-certified pest control · Naples, Florida</span></div>
+<div class="legal"><span>© ${new Date().getFullYear()} ${SITE.legalName} All rights reserved.</span><span>Licensed &amp; state-certified pest control · Southwest Florida</span></div>
 </div></footer>
 <div class="callbar"><a href="tel:${SITE.phoneE164}">Call now</a><a href="/contact/">Get a quote</a></div>
 <script>(()=>{const b=document.querySelector('.menu-toggle'),n=document.getElementById('nav');b&&b.addEventListener('click',()=>{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)})})()</script>`;
