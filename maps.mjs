@@ -114,7 +114,7 @@ const LEVEL = [
 // Activity at each station, in order around the property (index into LEVEL).
 const RODENT_READINGS = [0, 0, 1, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 3, 2, 0, 0, 5, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0];
 
-function lidPath(x, y, deg, scale = 1.45) {
+function lidPath(x, y, deg, scale = 1.1) {
   // Protecta LP lid seen from above: a six-sided shape, chamfered front corners.
   const shape = [[-13, -9], [13, -9], [13, 2], [8, 9], [-8, 9], [-13, 2]].map(([a, b]) => [a * scale, b * scale]);
   const r = (deg * Math.PI) / 180;
@@ -123,23 +123,41 @@ function lidPath(x, y, deg, scale = 1.45) {
   return pts(shape.map(([a, b]) => [x + a * c - b * s, y + a * s + b * c]));
 }
 
+/** A station `t` of the way along the wall p→q, just outside it, its back against the wall. */
+function wallStation([cx, cy], p, q, t) {
+  const wx = p[0] + (q[0] - p[0]) * t;
+  const wy = p[1] + (q[1] - p[1]) * t;
+  const mx = (p[0] + q[0]) / 2 - cx;
+  const my = (p[1] + q[1]) / 2 - cy;
+  const len = Math.hypot(mx, my);
+  const nx = mx / len;
+  const ny = my / len;
+  const off = 13; // half the lid's depth plus a little clearance from the wall
+  const deg = (Math.atan2(-nx, ny) * 180) / Math.PI;
+  return [wx + nx * off, wy + ny * off, deg];
+}
+
 export function rodentMap(compact = false) {
   let n = 0;
-  // A station off each corner, plus one along the long front wall of the bigger buildings.
+  // Stations sit against the outside wall, back to the wall and lid facing out, along the
+  // front and back walls (the side walls face the next building). The two end buildings
+  // also get one on their open side wall.
   const stations = BUILDINGS.flatMap((b, i) => {
-    const c = corners(b, 20);
-    const mid = [(c[0][0] + c[1][0]) / 2, (c[0][1] + c[1][1]) / 2];
-    return ([1, 2, 3].includes(i) ? [c[0], mid, c[1], c[2], c[3]] : c).map((p) => [p, b[4]]);
+    const c = corners(b);
+    const walls = [[0, i === 0 || i === 5 ? [0.15, 0.85] : [0.12, 0.5, 0.88]], [2, [0.15, 0.85]]];
+    if (i === 0) walls.push([1, [0.5]]);
+    if (i === 5) walls.push([3, [0.5]]);
+    return walls.flatMap(([e, ts]) => ts.map((t) => wallStation(b, c[e], c[(e + 1) % 4], t)));
   });
   const svg = [
     outlines(),
     buildingLabels(),
     stations
-      .map(([[x, y], deg]) => {
+      .map(([x, y, deg]) => {
         const lvl = RODENT_READINGS[n % RODENT_READINGS.length];
         const [fill, ink] = LEVEL[lvl];
         n++;
-        return `<g><polygon points="${lidPath(x, y, deg)}" fill="${fill}" stroke="#fff" stroke-width="2.5"/><text x="${x.toFixed(1)}" y="${(y + 5.5).toFixed(1)}" text-anchor="middle" font-size="16" font-weight="800" fill="${ink}">${n}</text></g>`;
+        return `<g><polygon points="${lidPath(x, y, deg)}" fill="${fill}" stroke="#fff" stroke-width="2.5"/><text x="${x.toFixed(1)}" y="${(y + 3.5).toFixed(1)}" text-anchor="middle" font-size="12.5" font-weight="800" fill="${ink}">${n}</text></g>`;
       })
       .join(""),
   ].join("");
