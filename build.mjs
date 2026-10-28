@@ -141,6 +141,7 @@ ${head}
 ${page.body}
 </main>
 ${footer()}
+${page.body.includes('class="st"') ? '<script src="/maps.js" defer></script>' : ""}
 </body>
 </html>
 `;
@@ -165,7 +166,7 @@ writeFileSync(join(OUT, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SI
 // Old Wix addresses keep working (and keep their Google ranking) via 301s.
 // Written to the project root (Vercel reads it from there), so commit it after a build.
 const vercel = {
-  buildCommand: "node build.mjs",
+  buildCommand: "node tools/satellite.mjs; node build.mjs",
   outputDirectory: "dist",
   cleanUrls: false,
   trailingSlash: true,

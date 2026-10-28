@@ -191,3 +191,20 @@ details p { margin: .7em 0 0; color: var(--ink-2); }
 .mapcard.compact { display: block; padding: 0; border: 0; background: none; }
 .mapcard figcaption { top: auto; bottom: 8px; left: auto; right: 8px; font-size: .75rem; padding: 4px 8px; }
 .mapfig svg.mapsvg { position: static; display: block; width: 100%; height: auto; }
+.mapcard-map { min-width: 0; }
+.mapfig svg .st { cursor: pointer; outline: none; }
+.mapfig svg .st:hover polygon, .mapfig svg .st:hover circle:not([fill="transparent"]) { filter: brightness(1.12); }
+.mapfig svg .st.on polygon, .mapfig svg .st.on circle:not([fill="transparent"]), .mapfig svg .st:focus-visible polygon, .mapfig svg .st:focus-visible circle:not([fill="transparent"]) { stroke: #fff; stroke-width: 2.6; }
+.mapfig svg .st.on path, .mapfig svg .st:focus-visible path { stroke: #fff; stroke-width: 3; }
+.mapdetail { margin-top: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-height: 64px; font-size: .92rem; }
+.mapdetail-hint { margin: 0; color: var(--ink-2); }
+.mapdetail h4 { margin: 0 0 6px; font-size: 1rem; color: var(--green); }
+.mapdetail dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 3px 14px; }
+.mapdetail dt { color: var(--ink-2); }
+.mapdetail dd { margin: 0; color: var(--ink); }
+.mapfig figcaption { pointer-events: none; }
+@media (max-width: 700px) {
+  .mapfig { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .mapfig svg.mapsvg { min-width: 680px; }
+  .mapfig figcaption { position: sticky; display: inline-block; left: 8px; right: auto; bottom: auto; margin: -34px 0 8px 8px; }
+}

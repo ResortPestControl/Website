@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node build.mjs",
+  "buildCommand": "node tools/satellite.mjs; node build.mjs",
   "outputDirectory": "dist",
   "cleanUrls": false,
   "trailingSlash": true,
