@@ -5,7 +5,7 @@ export const SITE = {
   legalName: "Resort Pest Control, Inc.",
   url: "https://www.resortpestcontrol.com",
   description:
-    "Family-owned pest control in Southwest Florida (Lee and Collier counties) for over 30 years. Condos, HOAs, clubs, businesses and homes: pest, rodent, termite and mosquito control.",
+    "Family-owned pest control in Southwest Florida (Lee and Collier counties) for over 30 years. Condos, HOAs, clubs, businesses and homes: pest, rodent and termite control.",
   phone: "(239) 352-4100",
   phoneE164: "+12393524100",
   street: "2685 Horseshoe Dr S, Suite 215",

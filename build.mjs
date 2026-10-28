@@ -45,7 +45,7 @@ function businessSchema() {
       addressCountry: "US",
     },
     areaServed: SITE.areas.map((a) => ({ "@type": "City", name: `${a}, FL` })).concat(SITE.counties.map((c) => ({ "@type": "AdministrativeArea", name: `${c}, FL` }))),
-    knowsAbout: ["Pest control", "Rodent control", "Termite control", "Mosquito control", "Integrated pest management"],
+    knowsAbout: ["Pest control", "Rodent control", "Termite control", "Integrated pest management"],
     ...(SITE.hours ? { openingHoursSpecification: SITE.hours } : {}),
     ...(SITE.sameAs.length ? { sameAs: SITE.sameAs } : {}),
   };
@@ -81,8 +81,6 @@ function footer() {
 <li><a href="/services/pest-control/">Pest Control</a></li>
 <li><a href="/services/rodent-control/">Rodent Control</a></li>
 <li><a href="/services/termite-control/">Termite Control</a></li>
-<li><a href="/services/mosquito-control/">Mosquito Control</a></li>
-<li><a href="/services/bed-bugs/">Bed Bugs</a></li>
 <li><a href="/condo-hoa-pest-control/">Condos, HOAs &amp; Commercial</a></li></ul></div>
 <div><h3>Customers</h3><ul>
 <li><a href="${SITE.portal}">Customer Login</a></li>

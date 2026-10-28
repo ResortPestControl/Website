@@ -88,8 +88,6 @@ const home = {
 <div class="card"><h3>General pest control</h3><p>Interior and exterior service with a perimeter barrier for ants, roaches, spiders and more.</p><a class="more" href="/services/pest-control/">Pest control</a></div>
 <div class="card"><h3>Rodent control</h3><p>Tamper-resistant bait stations, monitoring and exclusion for roof rats and mice.</p><a class="more" href="/services/rodent-control/">Rodent control</a></div>
 <div class="card"><h3>Termite control</h3><p>Inspections and treatment for subterranean and drywood termites.</p><a class="more" href="/services/termite-control/">Termite control</a></div>
-<div class="card"><h3>Mosquito control</h3><p>Yard and common-area treatments that cut down biting mosquitoes.</p><a class="more" href="/services/mosquito-control/">Mosquito control</a></div>
-<div class="card"><h3>Bed bugs</h3><p>Discreet inspection and treatment for homes, condos and hospitality.</p><a class="more" href="/services/bed-bugs/">Bed bug treatment</a></div>
 <div class="card"><h3>Condos, HOAs & commercial</h3><p>Ongoing programs set up with property managers and boards.</p><a class="more" href="/condo-hoa-pest-control/">Community programs</a></div>
 </div>
 </div></section>
@@ -137,15 +135,13 @@ const services = {
   crumbs: [],
   lede: "Residential and commercial pest control across Southwest Florida, Lee and Collier counties, built on integrated pest management.",
   description:
-    "Pest, rodent, termite, mosquito and bed bug control in Naples, Fort Myers and Southwest Florida from a family-owned company with 30+ years in Southwest Florida.",
+    "Pest, rodent and termite control for communities, businesses and homes in Naples, Fort Myers and Southwest Florida from a family-owned company with 30+ years in Southwest Florida.",
   body: `
 <section class="block"><div class="wrap">
 <div class="cards">
 <div class="card"><h3>General pest control</h3><p>Interior and exterior service with a perimeter barrier treatment around your home or building. Covers ants, cockroaches, spiders, silverfish and other common Florida pests.</p><a class="more" href="/services/pest-control/">Learn more</a></div>
 <div class="card"><h3>Rodent control</h3><p>Tamper-resistant exterior bait stations, interior trapping where needed, monitoring every visit and exclusion work that seals entry points.</p><a class="more" href="/services/rodent-control/">Learn more</a></div>
 <div class="card"><h3>Termite control</h3><p>Inspections and treatment options for subterranean and drywood termites, the two kinds that damage Southwest Florida buildings.</p><a class="more" href="/services/termite-control/">Learn more</a></div>
-<div class="card"><h3>Mosquito control</h3><p>Treatments for yards, pool cages and common areas, plus help finding and removing breeding sites.</p><a class="more" href="/services/mosquito-control/">Learn more</a></div>
-<div class="card"><h3>Bed bugs</h3><p>Thorough, discreet inspection and treatment for homes, condo units and hospitality properties.</p><a class="more" href="/services/bed-bugs/">Learn more</a></div>
 <div class="card"><h3>Condos, HOAs &amp; commercial</h3><p>Ongoing programs for associations, clubs, offices and restaurants, with reports for managers and boards.</p><a class="more" href="/condo-hoa-pest-control/">Learn more</a></div>
 </div>
 </div></section>
@@ -253,45 +249,6 @@ const termiteControl = servicePage({
   sections: `<h2>Signs of termites</h2>
 <ul><li>Swarms of winged insects indoors, often in spring</li><li>Discarded wings near windows and doors</li><li>Mud tubes on foundations or walls</li><li>Small piles of pellet-like droppings below wood</li><li>Wood that sounds hollow or blisters</li></ul>
 <p>Seeing any of these? <a href="/contact/">Request a termite inspection</a>.</p>`,
-});
-
-const mosquitoControl = servicePage({
-  slug: "mosquito-control",
-  title: "Mosquito Control in Naples, FL",
-  h1: "Mosquito control",
-  lede: "Enjoy your lanai, pool and yard again with treatments that cut down biting mosquitoes.",
-  description:
-    "Mosquito control for Naples homes and communities: yard, lanai and common-area treatments plus breeding-site removal. Call (239) 352-4100.",
-  intro:
-    "Mosquitoes breed in just a little standing water, and Naples' rainy season gives them plenty. We treat the shady, humid places where adult mosquitoes rest and help remove the places they breed.",
-  bullets: [
-    "Inspection for standing water and breeding sites",
-    "Treatment of shrubs, foliage and resting areas around the yard or common area",
-    "Treatment of breeding sites that can't be drained",
-    "Recurring service through the rainy season",
-  ],
-  sections: `<h2>Simple ways to help</h2>
-<ul><li>Empty saucers, buckets and toys that hold water</li><li>Keep gutters and drains clear</li><li>Check bromeliads and other plants that hold water</li><li>Keep pool and lanai screens in good repair</li></ul>`,
-});
-
-const bedBugs = servicePage({
-  slug: "bed-bugs",
-  title: "Bed Bug Treatment in Naples, FL",
-  h1: "Bed bug treatment",
-  lede: "Discreet inspection and treatment for homes, condo units and hospitality properties.",
-  description:
-    "Discreet bed bug inspection and treatment in Naples for homes, condo units and hotels. Family-owned, licensed technicians. Call (239) 352-4100.",
-  intro:
-    "Bed bugs travel in luggage, furniture and between connected units, so they can show up anywhere, including clean, well-kept homes. Early, thorough treatment matters, especially in condo buildings where they can spread to neighbors.",
-  bullets: [
-    "Detailed inspection of beds, furniture and surrounding areas",
-    "Treatment plan for the affected rooms or units",
-    "Preparation checklist so treatment works the first time",
-    "Follow-up inspection to confirm they're gone",
-    "Coordination with property managers for multi-unit buildings",
-  ],
-  sections: `<h2>Signs of bed bugs</h2>
-<ul><li>Small, itchy bites in lines or clusters</li><li>Tiny dark spots on mattress seams and sheets</li><li>Shed skins or live bugs along mattress edges and headboards</li></ul>`,
 });
 
 const condo = {
@@ -410,8 +367,6 @@ const pestsIndex = {
 <div class="card"><h3>Cockroaches</h3><p>American "palmetto bugs," German roaches, smokybrown and others.</p><a class="more" href="/pests/cockroaches/">Cockroach guide</a></div>
 <div class="card"><h3>Rodents</h3><p>Roof rats, Norway rats and house mice.</p><a class="more" href="/pests/rodents/">Rodent guide</a></div>
 <div class="card"><h3>Termites</h3><p>Subterranean and drywood termites.</p><a class="more" href="/services/termite-control/">Termites</a></div>
-<div class="card"><h3>Mosquitoes</h3><p>Biting pests that breed in standing water.</p><a class="more" href="/services/mosquito-control/">Mosquitoes</a></div>
-<div class="card"><h3>Bed bugs</h3><p>Hitchhikers that hide in mattresses and furniture.</p><a class="more" href="/services/bed-bugs/">Bed bugs</a></div>
 </div>
 </div></section>
 ${ctaBand("Not sure what you're seeing?", "Send us a photo or give us a call. We'll identify it and tell you what to do.")}`,
@@ -563,7 +518,7 @@ const contact = {
 <label>Phone<input type="tel" name="phone" autocomplete="tel"></label>
 <label class="full">Property address<input name="address" autocomplete="street-address"></label>
 <label class="full">I'm interested in
-<select name="interest"><option>General pest control</option><option>Rodent control</option><option>Termites</option><option>Mosquitoes</option><option>Bed bugs</option><option>Condo / HOA / commercial program</option><option>Something else</option></select></label>
+<select name="interest"><option>General pest control</option><option>Rodent control</option><option>Termites</option><option>Condo / HOA / commercial program</option><option>Something else</option></select></label>
 <label class="full">Message<textarea name="message" rows="4"></textarea></label>
 </div>
 <button class="btn" type="submit" style="margin-top:12px">Send request</button>
@@ -605,6 +560,6 @@ const notFound = {
 };
 
 export const pages = [
-  home, services, pestControl, rodentControl, termiteControl, mosquitoControl, bedBugs,
+  home, services, pestControl, rodentControl, termiteControl,
   condo, mapping, pestsIndex, ants, roaches, rodents, areas, about, contact, thanks, privacy, notFound,
 ];
