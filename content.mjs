@@ -50,7 +50,7 @@ ${STATIONS.map(([x, y, l], i) => `<g><circle cx="${x}" cy="${y}" r="27" fill="${
 
 /* --------------------------------- pages --------------------------------- */
 const homeFaq = faq([
-  ["What areas do you serve?", `We're based in Naples and serve Naples, North Naples, East Naples, Golden Gate, Marco Island, Bonita Springs, Estero and the rest of Collier County. See our <a href="/service-areas/">service areas</a>.`],
+  ["What areas do you serve?", `We're based in Naples and serve all of Southwest Florida: Lee and Collier counties, from Marco Island and Naples to Bonita Springs, Estero, Fort Myers and Cape Coral. See our <a href="/service-areas/">service areas</a>.`],
   ["Do you work with condo associations and HOAs?", `Yes. Much of our work is ongoing programs for condominium associations, HOAs, clubs and multi-unit communities, set up with the property manager and board. <a href="/condo-hoa-pest-control/">Learn about community programs</a>.`],
   ["What if pests come back after a treatment?", "If live pests show up inside after a residential treatment, we come back and retreat at no extra charge."],
   ["Can I see what was done at my property?", `Yes. Every customer gets a portal with their schedule, service reports and, for properties with bait stations, a map of every station and its activity. <a href="/mapping/">See how mapping works</a>.`],
@@ -60,12 +60,12 @@ const home = {
   path: "/",
   title: "Pest Control in Naples, FL | Resort Pest Control",
   description:
-    "Family-owned pest control in Naples & Collier County for 30+ years. Condos, HOAs, businesses and homes. Rodent stations mapped and reported every visit.",
+    "Family-owned pest control in Naples & Southwest Florida for 30+ years. Condos, HOAs, businesses and homes. Rodent stations mapped and reported every visit.",
   schema: [homeFaq.schema],
   body: `
 <section class="hero"><div class="wrap grid">
 <div>
-<div class="eyebrow">Naples · Collier County · Southwest Florida</div>
+<div class="eyebrow">Southwest Florida · Lee &amp; Collier counties</div>
 <h1>Pest control for Naples communities, businesses and homes</h1>
 <p class="lede">Resort Pest Control is a family-owned Naples company that has protected Southwest Florida properties for over 30 years. We specialize in condominiums, HOAs and clubs, and we bring the same care to every home.</p>
 <div class="actions"><a class="btn" href="tel:${SITE.phoneE164}">Call ${SITE.phone}</a><a class="btn ghost" href="/contact/">Request a free quote</a></div>
@@ -135,9 +135,9 @@ const services = {
   title: "Pest Control Services in Naples, FL",
   h1: "Pest control services",
   crumbs: [],
-  lede: "Residential and commercial pest control across Naples and Collier County, built on integrated pest management.",
+  lede: "Residential and commercial pest control across Southwest Florida, Lee and Collier counties, built on integrated pest management.",
   description:
-    "Pest, rodent, termite, mosquito and bed bug control in Naples and Collier County from a family-owned company with 30+ years in Southwest Florida.",
+    "Pest, rodent, termite, mosquito and bed bug control in Naples, Fort Myers and Southwest Florida from a family-owned company with 30+ years in Southwest Florida.",
   body: `
 <section class="block"><div class="wrap">
 <div class="cards">
@@ -168,7 +168,7 @@ function servicePage({ slug, title, h1, lede, description, intro, bullets, secti
         name: h1,
         serviceType: h1,
         provider: { "@id": `${SITE.url}/#business` },
-        areaServed: { "@type": "AdministrativeArea", name: "Collier County, FL" },
+        areaServed: SITE.counties.map((c) => ({ "@type": "AdministrativeArea", name: `${c}, FL` })),
       },
       ...(f ? [f.schema] : []),
     ],
@@ -241,7 +241,7 @@ const termiteControl = servicePage({
   h1: "Termite control",
   lede: "Inspections and treatment for the subterranean and drywood termites that damage Southwest Florida buildings.",
   description:
-    "Termite inspections and treatment in Naples and Collier County for subterranean and drywood termites. Licensed, family-owned for 30+ years.",
+    "Termite inspections and treatment in Lee and Collier counties for subterranean and drywood termites. Licensed, family-owned for 30+ years.",
   intro:
     "Florida has some of the highest termite pressure in the country. Subterranean termites travel from the soil through mud tubes, and drywood termites live entirely inside the wood they eat. Both can do serious damage before you notice. We inspect, identify which kind you have, and recommend the right treatment.",
   bullets: [
@@ -334,7 +334,7 @@ const condo = {
 </div></section>
 
 <section class="block"><div class="wrap">
-<div class="section-head"><h2>Commercial properties</h2><p>We also serve offices, restaurants, clubs and other businesses across Collier County with scheduled service that fits around your hours.</p></div>
+<div class="section-head"><h2>Commercial properties</h2><p>We also serve offices, restaurants, clubs and other businesses across Lee and Collier counties with scheduled service that fits around your hours.</p></div>
 </div></section>
 ${ctaBand("Manage a community or business?", "We'll walk your property, map your buildings and propose a program for your board.")}`,
 };
@@ -488,17 +488,18 @@ ${ctaBand()}`,
 /* ---------------------------- areas / about / contact ---------------------------- */
 const areas = {
   path: "/service-areas/",
-  title: "Pest Control Service Areas in Collier County",
+  title: "Pest Control in Lee & Collier Counties, Southwest Florida",
   h1: "Service areas",
-  lede: "From our Naples office we serve communities, businesses and homes across Collier County and nearby Southwest Florida.",
+  lede: "From our Naples office we serve communities, businesses and homes across Southwest Florida: all of Lee and Collier counties.",
   crumbs: [],
   description:
-    "Resort Pest Control serves Naples, North Naples, East Naples, Golden Gate, Marco Island, Bonita Springs, Estero and the rest of Collier County.",
+    "Resort Pest Control serves Southwest Florida: Naples, Marco Island, Bonita Springs, Estero, Fort Myers, Cape Coral and all of Lee and Collier counties.",
   body: `
 <section class="block"><div class="wrap split">
 <div>
 <h2>Where we work</h2>
-<ul class="checks">${SITE.areas.map((a) => `<li>${a}</li>`).join("")}<li>Communities throughout Collier County</li></ul>
+<p>All of <b>Lee County</b> and <b>Collier County</b>, including:</p>
+<ul class="checks" style="columns:2">${SITE.areas.map((a) => `<li>${a}</li>`).join("")}</ul>
 <p>Not sure if you're in our area? Call ${tel} and we'll let you know.</p>
 </div>
 <div><iframe class="map-embed" title="Resort Pest Control office location" loading="lazy" src="https://maps.google.com/maps?q=${encodeURIComponent(`${SITE.name}, ${SITE.street}, ${SITE.city}, ${SITE.region} ${SITE.zip}`)}&output=embed"></iframe></div>

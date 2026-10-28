@@ -44,7 +44,7 @@ function businessSchema() {
       postalCode: SITE.zip,
       addressCountry: "US",
     },
-    areaServed: SITE.areas.map((a) => ({ "@type": "City", name: `${a}, FL` })).concat([{ "@type": "AdministrativeArea", name: "Collier County, FL" }]),
+    areaServed: SITE.areas.map((a) => ({ "@type": "City", name: `${a}, FL` })).concat(SITE.counties.map((c) => ({ "@type": "AdministrativeArea", name: `${c}, FL` }))),
     knowsAbout: ["Pest control", "Rodent control", "Termite control", "Mosquito control", "Integrated pest management"],
     ...(SITE.hours ? { openingHoursSpecification: SITE.hours } : {}),
     ...(SITE.sameAs.length ? { sameAs: SITE.sameAs } : {}),
@@ -64,7 +64,7 @@ function breadcrumbSchema(page) {
 function header(path) {
   const links = NAV.map(([href, label]) => `<a href="${href}"${path.startsWith(href) ? ' aria-current="page"' : ""}>${label}</a>`).join("");
   return `<a class="skip" href="#main">Skip to content</a>
-<div class="topbar"><div class="wrap"><span>Family-owned pest control in Naples &amp; Collier County for 30+ years</span><span><a href="tel:${SITE.phoneE164}">Call ${SITE.phone}</a></span></div></div>
+<div class="topbar"><div class="wrap"><span>Family-owned pest control in Southwest Florida for 30+ years</span><span><a href="tel:${SITE.phoneE164}">Call ${SITE.phone}</a></span></div></div>
 <header class="site-header"><div class="wrap">
 <a class="brand" href="/" aria-label="${SITE.name} home"><img src="/img/logo-160.webp" width="56" height="56" alt=""><span>Resort<small>PEST CONTROL</small></span></a>
 <button class="menu-toggle" aria-expanded="false" aria-controls="nav">Menu</button>

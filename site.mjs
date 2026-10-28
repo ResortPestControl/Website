@@ -5,15 +5,16 @@ export const SITE = {
   legalName: "Resort Pest Control, Inc.",
   url: "https://www.resortpestcontrol.com",
   description:
-    "Family-owned pest control in Naples and Collier County for over 30 years. Condos, HOAs, clubs, businesses and homes: pest, rodent, termite and mosquito control.",
+    "Family-owned pest control in Southwest Florida (Lee and Collier counties) for over 30 years. Condos, HOAs, clubs, businesses and homes: pest, rodent, termite and mosquito control.",
   phone: "(239) 352-4100",
   phoneE164: "+12393524100",
   street: "2685 Horseshoe Dr S, Suite 215",
   city: "Naples",
   region: "FL",
   zip: "34104",
-  // TODO(Ryan): confirm the list of areas served.
-  areas: ["Naples", "North Naples", "East Naples", "Golden Gate", "Marco Island", "Bonita Springs", "Estero"],
+  // Southwest Florida = Lee and Collier counties (the owner, 2026-10-28).
+  counties: ["Collier County", "Lee County"],
+  areas: ["Naples", "Marco Island", "Golden Gate", "Ave Maria", "Immokalee", "Bonita Springs", "Estero", "Fort Myers", "Cape Coral", "Fort Myers Beach", "Sanibel", "Lehigh Acres"],
   // TODO(Ryan): office hours, e.g. [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday",...], opens: "08:00", closes: "17:00" }]
   hours: null,
   // TODO(Ryan): Google Business Profile, Facebook, etc.
