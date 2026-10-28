@@ -278,7 +278,7 @@ const condo = {
 </div></section>
 
 <section class="block alt"><div class="wrap">
-<div class="section-head"><h2>The customer portal for managers and boards</h2><p>Every property gets its own portal page. Managers sign in with an emailed link (no password to remember) and see everything in one place.</p></div>
+<div class="section-head"><h2>The customer portal for managers and boards</h2><p>Every property gets its own portal page, so managers and boards see everything in one place.</p></div>
 <div class="cards">
 <div class="card"><h3>Schedule</h3><p>Upcoming visits for each property.</p></div>
 <div class="card"><h3>Service reports</h3><p>Every published visit report, ready to share with the board.</p></div>
@@ -338,7 +338,7 @@ const mapping = {
 </div>
 <div>
 <h2>See it for yourself</h2>
-<p>Our demo property, "Naples Shores," shows exactly what customers see: the schedule, reports, the station map, invoices and service requests. No sign-in needed.</p>
+<p>Our demo property, "Naples Shores," shows exactly what customers see: the schedule, reports, the station map, invoices and service requests.</p>
 <p><a class="btn" href="${SITE.portalDemo}">Explore the demo portal</a></p>
 </div>
 </div></section>
