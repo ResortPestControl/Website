@@ -1,6 +1,7 @@
 // Page content. Each page: path, title (the <title> before " | Resort Pest Control"),
 // description (Google's snippet, aim for 140-160 characters), and body HTML.
 import { SITE } from "./site.mjs";
+import { barrierMap, rodentMap, termiteMap, serviceAreaMap } from "./maps.mjs";
 
 const tel = `<a href="tel:${SITE.phoneE164}">${SITE.phone}</a>`;
 
@@ -28,32 +29,12 @@ const faq = (items) => ({
   },
 });
 
-/* ------------------------------------------------------------------ */
-/* Map illustration: the demo property's satellite photo with stations */
-/* ------------------------------------------------------------------ */
-const STATIONS = [
-  // [x, y, level]  level: 0 none, 1 light, 2 moderate, 3 heavy  (viewBox 1350 x 1050)
-  [585, 735, 0], [470, 600, 1], [610, 480, 0], [700, 420, 0], [800, 300, 2], [930, 240, 0], [1010, 140, 0],
-  [440, 790, 0], [525, 885, 1], [330, 760, 0], [180, 760, 0], [60, 760, 0], [760, 760, 0], [845, 880, 3],
-  [880, 660, 0], [1090, 210, 0], [890, 515, 1], [770, 515, 0], [655, 640, 0], [380, 560, 0],
-];
-const LEVEL = ["#eae5db", "#dfa06c", "#e2b100", "#c62828"];
-const mapFigure = (caption = "Illustration based on our sample property") => `
-<figure class="mapfig" style="margin:0">
-<img src="/img/property-1350.webp" srcset="/img/property-800.webp 800w, /img/property-1350.webp 1350w" sizes="(max-width: 860px) 100vw, 560px" width="1350" height="1050" alt="Satellite map of a sample community with numbered rodent bait stations around the buildings" loading="lazy">
-<svg viewBox="0 0 1350 1050" aria-hidden="true">
-${STATIONS.map(([x, y, l], i) => `<g><circle cx="${x}" cy="${y}" r="27" fill="${LEVEL[l]}" stroke="#fff" stroke-width="5"/><text x="${x}" y="${y + 8}" text-anchor="middle" font-size="24" font-weight="700" font-family="system-ui,sans-serif" fill="${l === 3 ? "#fff" : "#1d1c18"}">${i + 1}</text></g>`).join("")}
-</svg>
-<figcaption>${caption}</figcaption>
-</figure>
-<ul class="legend"><li><i style="background:${LEVEL[0]}"></i>No activity</li><li><i style="background:${LEVEL[1]}"></i>Light</li><li><i style="background:${LEVEL[2]}"></i>Moderate</li><li><i style="background:${LEVEL[3]}"></i>Heavy</li></ul>`;
-
 /* --------------------------------- pages --------------------------------- */
 const homeFaq = faq([
   ["What areas do you serve?", `We're based in Naples and serve all of Southwest Florida: Lee and Collier counties, from Marco Island and Naples to Bonita Springs, Estero, Fort Myers and Cape Coral. See our <a href="/service-areas/">service areas</a>.`],
   ["Do you work with condo associations and HOAs?", `Yes. Much of our work is ongoing programs for condominium associations, HOAs, clubs and multi-unit communities, set up with the property manager and board. <a href="/condo-hoa-pest-control/">Learn about community programs</a>.`],
   ["What if pests come back after a treatment?", "If live pests show up inside after a residential treatment, we come back and retreat at no extra charge."],
-  ["Can I see what was done at my property?", `Yes. Every customer gets a portal with their schedule, service reports and, for properties with bait stations, a map of every station and its activity. <a href="/mapping/">See how mapping works</a>.`],
+  ["Can I see what was done at my property?", `Yes. Every customer gets a portal with their schedule and service reports. Properties with a barrier, rodent or termite program also get maps showing where the barrier was applied and every rodent and termite station with its activity. <a href="/mapping/">See how mapping works</a>.`],
 ]);
 
 const home = {
@@ -100,7 +81,7 @@ const home = {
 <ul class="checks"><li>Numbered stations on an aerial map of your property</li><li>Activity levels recorded at every visit</li><li>Reports and the map available in your customer portal</li></ul>
 <div class="actions"><a class="btn green" href="/mapping/">How mapping works</a><a class="btn ghost" href="${SITE.portalDemo}">Try the live demo</a></div>
 </div>
-<div>${mapFigure()}</div>
+<div>${rodentMap()}</div>
 </div></section>
 
 <section class="block"><div class="wrap split">
@@ -224,7 +205,7 @@ const rodentControl = servicePage({
   ],
   sections: `<h2>See your stations on a map</h2>
 <p>For communities and commercial properties, we draw your buildings and every bait station on an aerial map. Each visit's readings color the map by activity level, so managers and boards can see exactly where rodents are active and how the numbers change over time. <a href="/mapping/">Learn how our mapping works</a>.</p>
-${mapFigure()}`,
+${rodentMap()}`,
   faqItems: [
     ["What are the signs of rats in my home?", "Droppings, gnaw marks on wiring or food packaging, greasy rub marks along walls, chewed fruit outdoors and scratching or running noises in the attic at night."],
     ["Are bait stations safe around pets and children?", "We use locked, tamper-resistant stations designed so bait can be reached by rodents but not by children, pets or wildlife."],
@@ -274,7 +255,7 @@ const condo = {
 <li>One portal for managers who look after several properties</li>
 </ul>
 </div>
-<div>${mapFigure("Every station, on your property's own map")}</div>
+<div>${rodentMap()}</div>
 </div></section>
 
 <section class="block alt"><div class="wrap">
@@ -298,30 +279,35 @@ ${ctaBand("Manage a community or business?", "We'll walk your property, map your
 
 const mapping = {
   path: "/mapping/",
-  title: "Rodent Station Mapping & Service Reports",
+  title: "Barrier, Rodent & Termite Station Maps",
   h1: "Mapping and reporting",
   eyebrow: "Our technology",
-  lede: "We map every building and bait station on your property, record activity at every visit, and show you the results on a map in your customer portal.",
+  lede: "We map every building on your property and record barrier treatments, rodent stations and termite stations at every visit, so you can see exactly what was done.",
   crumbs: [],
   description:
-    "See every rodent bait station on an aerial map of your property, with activity recorded each visit and reports in your online portal. Resort Pest Control, Southwest Florida.",
+    "See barrier treatments, rodent bait stations and termite stations on an aerial map of your property, updated every visit in your online portal.",
   body: `
-<section class="block"><div class="wrap split">
-<div>
+<section class="block"><div class="wrap">
+<div class="section-head">
 <h2>Your property, mapped</h2>
-<p>Most pest companies hand you a paper ticket. We built our own system, FieldBook, so you can see exactly what was done. Each property gets an aerial map with its buildings drawn in and every rodent bait station numbered and pinned where it actually sits.</p>
-<p>At each visit, the technician checks every station on the map and records what it shows. The report then colors each station by activity, so you can see at a glance where rodents are feeding and whether activity is going down.</p>
+<p>Most pest companies hand you a paper ticket. We built our own system, FieldBook, so you can see exactly what was done. Each property gets an aerial map with its buildings drawn in, and every treatment and station is recorded on it at every visit. Depending on your program, your reports include up to three maps.</p>
 <div class="actions"><a class="btn green" href="${SITE.portalDemo}">Open the live demo</a><a class="btn ghost" href="${SITE.portal}">Customer Login</a></div>
 </div>
-<div>${mapFigure()}</div>
+<nav class="map-tabs" aria-label="Maps on this page"><a href="#barrier-map">Barrier treatment</a><a href="#rodent-map">Rodent stations</a><a href="#termite-map">Termite stations</a></nav>
+<div class="mapgrid">
+${barrierMap()}
+${rodentMap()}
+${termiteMap()}
+</div>
+<p class="note">Maps shown are illustrations on a sample property. Your maps are drawn from your own property's aerial photo, buildings and stations.</p>
 </div></section>
 
 <section class="block alt"><div class="wrap">
 <div class="section-head"><h2>How it works</h2></div>
 <ol class="steps">
-<li><b>We map your property</b>Buildings are drawn on an aerial photo of your property and every bait station is pinned and numbered.</li>
-<li><b>Technicians record every station</b>On each visit the technician works through the map on a tablet and records the activity at each station, plus perimeter treatments and notes.</li>
-<li><b>You get a report</b>After the visit, a report with the colored station map is published to your portal.</li>
+<li><b>We map your property</b>Buildings are drawn on an aerial photo of your property, and every rodent and termite station is pinned and numbered.</li>
+<li><b>Technicians record every station</b>On each visit the technician works through the map on a tablet and records the barrier treatment, the activity at each rodent and termite station, and notes.</li>
+<li><b>You get a report</b>After the visit, a report with your maps is published to your portal.</li>
 <li><b>Trends over time</b>Because every station is tracked visit after visit, you can see where activity is concentrated and confirm the program is working.</li>
 </ol>
 </div></section>
@@ -457,7 +443,7 @@ const areas = {
 <ul class="checks" style="columns:2">${SITE.areas.map((a) => `<li>${a}</li>`).join("")}</ul>
 <p>Not sure if you're in our area? Call ${tel} and we'll let you know.</p>
 </div>
-<div><iframe class="map-embed" title="Resort Pest Control office location" loading="lazy" src="https://maps.google.com/maps?q=${encodeURIComponent(`${SITE.name}, ${SITE.street}, ${SITE.city}, ${SITE.region} ${SITE.zip}`)}&output=embed"></iframe></div>
+<div>${serviceAreaMap()}</div>
 </div></section>
 ${ctaBand()}`,
 };
@@ -504,7 +490,7 @@ const contact = {
 <div class="card"><h3>Visit</h3><p style="margin:0">${SITE.street}<br>${SITE.city}, ${SITE.region} ${SITE.zip}</p></div>
 <div class="card"><h3>Customers</h3><p>Schedule, reports, maps and invoices.</p><a class="more" href="${SITE.portal}">Customer Login</a></div>
 </div>
-<iframe class="map-embed" style="margin-top:18px" title="Map to Resort Pest Control" loading="lazy" src="https://maps.google.com/maps?q=${encodeURIComponent(`${SITE.name}, ${SITE.street}, ${SITE.city}, ${SITE.region} ${SITE.zip}`)}&output=embed"></iframe>
+<iframe class="map-embed" style="margin-top:18px" title="Map to Resort Pest Control" loading="lazy" src="https://maps.google.com/maps?q=${encodeURIComponent(`2685 Horseshoe Dr S, ${SITE.city}, ${SITE.region} ${SITE.zip}`)}&z=15&output=embed"></iframe>
 </div>
 <form class="portal-box" method="post" action="${SITE.formEndpoint}">
 <h2>Request service</h2>
