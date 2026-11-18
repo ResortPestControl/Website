@@ -17,6 +17,18 @@ const ART = {
 };
 
 
+// Google reviews: only real reviews from the Google Business Profile (SITE.reviews).
+// The strip stays hidden until there are some.
+const reviewsStrip = () =>
+  SITE.reviews.length
+    ? `<section class="block reviews"><div class="wrap">
+<div class="section-head"><h2>What customers say</h2>${SITE.googleReviewsUrl ? `<p><a href="${SITE.googleReviewsUrl}">See all our Google reviews</a></p>` : ""}</div>
+<div class="review-row">${SITE.reviews
+        .map((r) => `<figure class="review"><div class="stars" aria-label="${r.stars} out of 5 stars">${"★".repeat(r.stars)}</div><blockquote>${r.text}</blockquote><figcaption>${r.name}</figcaption></figure>`)
+        .join("")}</div>
+</div></section>`
+    : "";
+
 const tel = `<a href="tel:${SITE.phoneE164}">${SITE.phone}</a>`;
 
 const ctaBand = (heading = "Ready for a pest-free property?", text = "Call our office or send a request and we'll get back to you the same business day.") => `
@@ -70,7 +82,7 @@ const home = {
 ${tiles([["family", "Family-owned, 30+ years"], ["badge", "Licensed &amp; state-certified"], ["pin", "Every station mapped"], ["report", "Reports &amp; maps online"], ["shield", "Free retreats"]], "compact")}
 </div>
 </div></section>
-
+${reviewsStrip()}
 <section class="block"><div class="wrap">
 <div class="section-head"><h2>Pest control services</h2></div>
 <div class="rows">
@@ -259,7 +271,13 @@ ${tiles([["calendar", "Scheduled service", "Buildings and common areas"], ["stat
 </div></section>
 
 <section class="block alt"><div class="wrap">
-<div class="section-head"><h2>The customer portal for managers and boards</h2><p>Every property gets its own portal page, so managers and boards see everything in one place.</p></div>
+<div class="section-head"><h2>Your property, mapped</h2><p>Every building, barrier treatment and station on one map, updated every visit. Tap a station or building to see its latest reading.</p></div>
+<div class="map-trio">${barrierMap(true)}${termiteMap(true)}</div>
+<div class="actions"><a class="btn green" href="${SITE.portalDemo}">Try the demo property</a><a class="btn ghost" href="/mapping/">How mapping works</a></div>
+</div></section>
+
+<section class="block"><div class="wrap">
+<div class="section-head"><h2>The owner portal for managers and boards</h2><p>Every property gets its own portal: everything in one place.</p></div>
 ${tiles([["calendar", "Schedule"], ["report", "Service reports"], ["pin", "Property map"], ["dollar", "Invoices &amp; payments"], ["chat", "Service requests"], ["people", "Contacts"]])}
 <div class="actions"><a class="btn green" href="${SITE.portal}">Customer Login</a><a class="btn ghost" href="${SITE.portalDemo}">Try the demo property</a></div>
 </div></section>
@@ -447,6 +465,73 @@ ${speciesCards([
 ${ctaBand()}`,
 };
 
+
+/* ------------------------------ town pages ------------------------------ */
+const TOWNS = [
+  ["naples", "Naples", "Collier County", "Our office is on Horseshoe Drive in Naples, so most of the city is a short drive away. We look after condos, HOAs, clubs, businesses and homes from Old Naples to North Naples and Golden Gate."],
+  ["marco-island", "Marco Island", "Collier County", "Island condos and waterfront homes see heavy pressure from roof rats in the palms and from ants and palmetto bugs after summer rains."],
+  ["bonita-springs", "Bonita Springs", "Lee County", "Gated communities, golf clubs and homes between Naples and Estero, with ongoing programs for associations and their managers."],
+  ["estero", "Estero", "Lee County", "Country club and HOA communities where boards want every rodent and termite station mapped and reported."],
+  ["fort-myers", "Fort Myers", "Lee County", "Homes, condos and businesses across Fort Myers, from the river district to the newer communities east of I-75."],
+  ["cape-coral", "Cape Coral", "Lee County", "Canal-front homes and condos, where landscaping and seawalls give roof rats, ants and termites plenty of cover."],
+];
+
+const townPages = TOWNS.map(([slug, town, county, local]) => ({
+  path: `/service-areas/${slug}/`,
+  title: `Pest Control in ${town}, FL`,
+  h1: `Pest control in ${town}`,
+  eyebrow: `${county} · Southwest Florida`,
+  lede: local,
+  crumbs: [["/service-areas/", "Service areas"]],
+  description: `Pest, rodent and termite control in ${town}, FL (${county}) from a family-owned Southwest Florida company with 30+ years of local service. Call ${SITE.phone}.`,
+  schema: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: `Pest control in ${town}, FL`,
+      serviceType: "Pest control",
+      provider: { "@id": `${SITE.url}/#business` },
+      areaServed: { "@type": "City", name: `${town}, FL` },
+    },
+  ],
+  body: `
+<section class="block"><div class="wrap">
+<div class="section-head"><h2>What we do in ${town}</h2></div>
+<div class="rows">
+${rowCard(ART.pest(), "General pest control", "Inside and out, with a perimeter barrier.", "/services/pest-control/", "Pest control")}
+${rowCard(ART.rodent(), "Rodent control", "Locked bait stations, mapped and checked every visit.", "/services/rodent-control/", "Rodent control")}
+${rowCard(ART.termite(), "Termite control", "Inspections and treatment for subterranean and drywood termites.", "/services/termite-control/", "Termite control")}
+${rowCard(ART.condo(), "Condos, HOAs &amp; commercial", "Ongoing programs with reports for managers and boards.", "/condo-hoa-pest-control/", "Community programs")}
+</div>
+${tiles([["family", "Family-owned, 30+ years"], ["badge", "Licensed &amp; state-certified"], ["pin", "Every station mapped"], ["shield", "Free residential retreats"]], "four")}
+</div></section>
+${ctaBand(`Pest control in ${town}?`, "Call our office or send a request and we'll get back to you the same business day.")}`,
+}));
+
+/* ------------------------------ seasonal tips ------------------------------ */
+const TIPS = [
+  ["Spring", () => termite("Termite swarmer", { wings: true }), "Termite swarm season", "Winged termites indoors or piles of wings by windows mean a colony nearby. Save one in a bag and call us for an inspection."],
+  ["Summer", () => ant("Ant", { head: "#a8432a", thorax: "#a8432a", gaster: "#4a2418" }), "Rainy season drives pests in", "Heavy rain floods nests, so ants and palmetto bugs head indoors. Keep mulch a few inches back from the walls and fix leaky outdoor taps."],
+  ["Fall", () => rodent("Roof rat", { fur: "#3a332e", ear: 7, tail: 1.25, body: 0.9 }), "Rodents look for shelter", "As nights cool, roof rats move into attics. Trim palm fronds and branches away from the roof and seal gaps around pipes and vents."],
+  ["Winter", () => roach("Cockroach", { body: "#8a3f1a", shield: "#9a4a20", band: "#e8c98a" }), "Season residents return", "Units closed up for summer can hide roaches and ants. Book a service before you or your owners arrive so the place is ready."],
+];
+
+const tips = {
+  path: "/tips/",
+  title: "Seasonal Pest Tips for Southwest Florida",
+  h1: "Seasonal pest tips",
+  lede: "What to watch for in Southwest Florida through the year.",
+  crumbs: [],
+  description: "Seasonal pest tips for Southwest Florida homes and communities: termite swarms, rainy-season ants and roaches, rodents in the fall and getting units ready for winter.",
+  body: `
+<section class="block"><div class="wrap">
+<div class="rows">
+${TIPS.map(([season, art, title, text]) => `<div class="card row"><div class="pest-art">${art()}</div><div class="row-body"><div class="eyebrow">${season}</div><h3>${title}</h3><p>${text}</p></div></div>`).join("\n")}
+</div>
+</div></section>
+${ctaBand("Seeing something now?", "Send us a photo or give us a call. We'll identify it and tell you what to do.")}`,
+};
+
 /* ---------------------------- areas / about / contact ---------------------------- */
 const areas = {
   path: "/service-areas/",
@@ -461,7 +546,12 @@ const areas = {
 <div>
 <h2>Where we work</h2>
 <p>All of <b>Lee County</b> and <b>Collier County</b>, including:</p>
-<ul class="checks" style="columns:2">${SITE.areas.map((a) => `<li>${a}</li>`).join("")}</ul>
+<div class="town-links">${SITE.areas
+  .map((a) => {
+    const t = TOWNS.find(([, town]) => town === a);
+    return t ? `<a class="town on" href="/service-areas/${t[0]}/">${icon("pin", 20)}${a}</a>` : `<span class="town">${icon("pin", 20)}${a}</span>`;
+  })
+  .join("")}</div>
 <p>Not sure if you're in our area? Call ${tel} and we'll let you know.</p>
 </div>
 <div>${serviceAreaMap()}</div>
@@ -511,6 +601,11 @@ const contact = {
 <p class="form-error" id="form-error" hidden>Sorry, that didn't go through. Please check your name and email, or call us at ${tel}.</p>
 <script>if (/[?&]error=1/.test(location.search)) document.getElementById("form-error").hidden = false;</script>
 <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Leave this empty <input name="company_website" tabindex="-1" autocomplete="off"></label></p>
+<fieldset class="ptype"><legend>Property type</legend>
+<label><input type="radio" name="property_type" value="Home" checked>${icon("family", 28)}<span>Home</span></label>
+<label><input type="radio" name="property_type" value="Condo / HOA">${icon("building", 28)}<span>Condo / HOA</span></label>
+<label><input type="radio" name="property_type" value="Business / commercial">${icon("report", 28)}<span>Business</span></label>
+</fieldset>
 <div class="fields">
 <label>First name*<input name="first_name" required autocomplete="given-name"></label>
 <label>Last name<input name="last_name" autocomplete="family-name"></label>
@@ -561,5 +656,5 @@ const notFound = {
 
 export const pages = [
   home, services, pestControl, rodentControl, termiteControl,
-  condo, mapping, pestsIndex, ants, roaches, rodents, areas, about, contact, thanks, privacy, notFound,
+  condo, mapping, pestsIndex, ants, roaches, rodents, areas, ...townPages, tips, about, contact, thanks, privacy, notFound,
 ];

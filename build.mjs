@@ -64,7 +64,7 @@ function breadcrumbSchema(page) {
 function header(path) {
   const links = NAV.map(([href, label]) => `<a href="${href}"${path.startsWith(href) ? ' aria-current="page"' : ""}>${label}</a>`).join("");
   return `<a class="skip" href="#main">Skip to content</a>
-<div class="topbar"><div class="wrap"><span>Family-owned pest control in Southwest Florida for 30+ years</span><span><a href="tel:${SITE.phoneE164}">Call ${SITE.phone}</a></span></div></div>
+<div class="topbar"><div class="wrap"><span>Family-owned pest control in Southwest Florida for 30+ years</span><span><a href="/pay/">Pay a bill</a> · <a href="${SITE.portal}">Customer login</a> · <a href="tel:${SITE.phoneE164}">Call ${SITE.phone}</a></span></div></div>
 <header class="site-header"><div class="wrap">
 <a class="brand" href="/" aria-label="${SITE.name} home"><img src="/img/logo-160.webp" width="56" height="56" alt=""><span>Resort<small>PEST CONTROL</small></span></a>
 <button class="menu-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
@@ -84,12 +84,14 @@ function footer() {
 <li><a href="/condo-hoa-pest-control/">Condos, HOAs &amp; Commercial</a></li></ul></div>
 <div><h3>Customers</h3><ul>
 <li><a href="${SITE.portal}">Customer Login</a></li>
+<li><a href="/pay/">Pay a bill</a></li>
 <li><a href="/mapping/">Mapping &amp; Reports</a></li>
 <li><a href="${SITE.portalDemo}">Try the portal demo</a></li>
 <li><a href="${SITE.gorilladesk}">Billing portal (GorillaDesk)</a></li></ul></div>
 <div><h3>Company</h3><ul>
 <li><a href="/about/">About Us</a></li>
 <li><a href="/service-areas/">Service Areas</a></li>
+<li><a href="/tips/">Seasonal pest tips</a></li>
 <li><a href="/pests/">Pest Identification</a></li>
 <li><a href="/contact/">Contact</a></li>
 <li><a href="/privacy/">Privacy</a></li></ul></div>
@@ -179,7 +181,7 @@ const vercel = {
     ["/contact-us", "/contact/", true],
     ["/login", SITE.portal, false],
     ["/portal", SITE.portal, false],
-    ["/pay", SITE.portal, false],
+    ["/pay", SITE.payUrl, false],
   ].flatMap(([from, to, permanent]) => [
     { source: from, destination: to, permanent },
     { source: `${from}/`, destination: to, permanent },

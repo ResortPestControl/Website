@@ -252,3 +252,22 @@ details p { margin: .7em 0 0; color: var(--ink-2); }
 .tiles.two .ico { width: 30px; height: 30px; }
 a.pest-chip { color: var(--ink); text-decoration: none; }
 a.pest-chip:hover { border-color: var(--green); }
+.ptype { border: 0; padding: 0; margin: 0 0 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ptype legend { font-weight: 700; margin-bottom: 6px; font-size: .95rem; }
+.ptype label { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 6px; border: 1.5px solid var(--line); border-radius: 12px; cursor: pointer; font-size: .9rem; font-weight: 600; color: var(--ink-2); background: var(--surface); }
+.ptype input { position: absolute; opacity: 0; }
+.ptype label:has(input:checked) { border-color: var(--green); color: var(--green); background: #e6efe8; }
+.ptype label:has(input:focus-visible) { outline: 2px solid var(--green); outline-offset: 2px; }
+.map-trio { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 860px) { .map-trio { grid-template-columns: 1fr; } }
+.town-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 1em 0; }
+.town { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px 6px 8px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: .92rem; color: var(--ink-2); }
+.town .ico { color: var(--green); }
+a.town.on { color: var(--ink); text-decoration: none; font-weight: 600; }
+a.town.on:hover { border-color: var(--green); }
+.review-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.review { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+.review .stars { color: #e2a100; letter-spacing: 2px; }
+.review blockquote { margin: 8px 0; color: var(--ink); }
+.review figcaption { font-size: .9rem; color: var(--ink-2); font-weight: 600; }
+@media (max-width: 700px) { .topbar .wrap > span:first-child { display: none; } .topbar .wrap { justify-content: center; } }

@@ -19,8 +19,14 @@ export const SITE = {
   hours: null,
   // TODO(Ryan): Google Business Profile, Facebook, etc.
   sameAs: [],
+  // TODO(Ryan): the Google Business Profile reviews link, and real reviews copied from it
+  // as { name, stars, text }. The reviews strip on the home page stays hidden until there are some.
+  googleReviewsUrl: null,
+  reviews: [],
   portal: "https://fieldbook.resortpestcontrol.com/portal",
   portalDemo: "https://fieldbook.resortpestcontrol.com/portal/demo",
+  // "Pay a bill" (/pay/ redirects here). The portal for now; point it at autopay once that ships.
+  payUrl: "https://fieldbook.resortpestcontrol.com/portal",
   gorilladesk: "https://portal.gorilladesk.com/resortpestcontrol",
   // The contact form posts here: FieldBook emails the office and records it as a lead.
   formEndpoint: "https://fieldbook.resortpestcontrol.com/api/website/contact",
