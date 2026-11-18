@@ -28,15 +28,11 @@ const BUILDINGS = SRC.buildings.map(([key, d], i) => {
   const poly = polyOf(d);
   return { key, d, poly, label: LABELS[i], min: bboxMin(poly), c: bboxCenter(poly) };
 });
-const byKey = (k) => BUILDINGS.find((b) => b.key === k);
 
-/** Repeat one building's station layout on every building, by the offset between their footprints. */
-function repeatLayout(fromKey, points) {
-  const [fx, fy] = byKey(fromKey).min;
-  return BUILDINGS.flatMap((b, bi) => points.map(([x, y, facing], n) => ({ b: bi, n: n + 1, x: x - fx + b.min[0], y: y - fy + b.min[1], facing })));
-}
-const RODENT = repeatLayout(SRC.rodentFrom, SRC.rodent);
-const TERMITE = repeatLayout(SRC.termiteFrom, SRC.termite);
+/** Stations as mapped in FieldBook, building by building. */
+const stationsOf = (perBuilding) => perBuilding.flatMap((pts, bi) => pts.map(([x, y, facing], n) => ({ b: bi, n: n + 1, x, y, facing })));
+const RODENT = stationsOf(SRC.rodent);
+const TERMITE = stationsOf(SRC.termite);
 
 const JOINS = [[1460, 1443], [1765, 1446], [1987, 1451], [2154, 1431], [2275.5, 1396]];
 const basemap = () =>
@@ -133,14 +129,14 @@ const LEVEL = [
   ["#5b7a99", "New station installed", ["Feeding", "New this visit"], ["Action", "Station installed and filled"]],
   ["#7d5ba6", "Expired bait replaced", ["Feeding", "None"], ["Action", "Expired bait replaced"]],
 ];
-// Reading at each station, building by building (6 per building): quiet at the west end,
+// Reading at each station, building by building (4 per building): quiet at the west end,
 // activity building toward the east end of the property.
 const RODENT_READINGS = [
-  0, 0, 0, 0, 0, 0,
-  0, 0, 1, 0, 0, 5,
-  0, 0, 0, 1, 0, 0,
-  1, 0, 2, 2, 1, 0,
-  4, 1, 3, 2, 2, 1,
+  0, 0, 0, 0,
+  0, 1, 0, 5,
+  0, 0, 1, 0,
+  1, 2, 2, 0,
+  3, 2, 4, 1,
 ];
 
 // Protecta LP lid from above (StationMarker's LP_HEX_UNIT): full-width back at local +y,
@@ -191,9 +187,9 @@ export function rodentMap(compact = false) {
 /* ---------------------------------------------------------------- termite */
 export function termiteMap(compact = false) {
   // Live activity at two neighbouring stations on building 300, and one that couldn't be reached.
-  const perBldg = SRC.termite.length;
-  const live = new Set([2 * perBldg + 5, 2 * perBldg + 6]);
-  const noAccess = new Set([4 * perBldg + 11]);
+  const first = (b) => SRC.termite.slice(0, b).reduce((n, pts) => n + pts.length, 0);
+  const live = new Set([first(2) + 8, first(2) + 9]);
+  const noAccess = new Set([first(4) + 20]);
   const svg = [
     outlines(),
     buildingLabels(),
