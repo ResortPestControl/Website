@@ -597,7 +597,7 @@ const contact = {
 <section class="block"><div class="wrap split" style="align-items:start">
 <div>
 <div class="contact-grid">
-<div class="card"><h3>Call</h3><a class="big-phone" href="tel:${SITE.phoneE164}">${SITE.phone}</a></div>
+<div class="card"><h3>Call</h3><a class="big-phone" href="tel:${SITE.phoneE164}">${SITE.phone}</a><p style="margin:6px 0 0">Office hours: ${SITE.hoursText}</p></div>
 <div class="card"><h3>Visit</h3><p style="margin:0">${SITE.street}<br>${SITE.city}, ${SITE.region} ${SITE.zip}</p></div>
 <div class="card"><h3>Customers</h3><p>Schedule, reports, maps and invoices.</p><a class="more" href="${SITE.portal}">Customer Login</a></div>
 </div>

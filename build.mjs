@@ -76,7 +76,7 @@ function footer() {
   return `<footer class="site-footer"><div class="wrap">
 <div class="cols">
 <div><a class="brand" href="/"><img src="/img/logo-160.webp" width="56" height="56" alt="" loading="lazy"><span style="color:#fff">Resort<small style="color:#c9d6cd">PEST CONTROL</small></span></a>
-<p style="margin-top:14px">${SITE.street}<br>${SITE.city}, ${SITE.region} ${SITE.zip}<br><a href="tel:${SITE.phoneE164}">${SITE.phone}</a></p></div>
+<p style="margin-top:14px">${SITE.street}<br>${SITE.city}, ${SITE.region} ${SITE.zip}<br><a href="tel:${SITE.phoneE164}">${SITE.phone}</a><br>Office: ${SITE.hoursText}</p></div>
 <div><h3>Services</h3><ul>
 <li><a href="/services/pest-control/">Pest Control</a></li>
 <li><a href="/services/rodent-control/">Rodent Control</a></li>

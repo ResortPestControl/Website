@@ -8,15 +8,16 @@ export const SITE = {
     "Family-owned pest control in Southwest Florida (Lee and Collier counties) for over 30 years. Condos, HOAs, clubs, businesses and homes: pest, rodent and termite control.",
   phone: "(239) 352-4100",
   phoneE164: "+12393524100",
-  street: "2685 Horseshoe Dr S, Suite 215",
+  street: "2685 Horseshoe Dr S, Ste 15",
   city: "Naples",
   region: "FL",
   zip: "34104",
   // Southwest Florida = Lee and Collier counties (the owner, 2026-10-28).
   counties: ["Collier County", "Lee County"],
   areas: ["Naples", "Marco Island", "Golden Gate", "Ave Maria", "Immokalee", "Bonita Springs", "Estero", "Fort Myers", "Cape Coral", "Fort Myers Beach", "Sanibel", "Lehigh Acres"],
-  // TODO(Ryan): office hours, e.g. [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday",...], opens: "08:00", closes: "17:00" }]
-  hours: null,
+  // Office hours 9 to 4, weekdays (the owner, 2026-11-18).
+  hours: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "16:00" }],
+  hoursText: "Mon–Fri, 9 am – 4 pm",
   // TODO(Ryan): Google Business Profile, Facebook, etc.
   sameAs: [],
   // TODO(Ryan): the Google Business Profile reviews link, and real reviews copied from it
