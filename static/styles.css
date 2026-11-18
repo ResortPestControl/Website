@@ -208,3 +208,24 @@ details p { margin: .7em 0 0; color: var(--ink-2); }
   .mapfig svg.mapsvg { min-width: 680px; }
   .mapfig figcaption { position: sticky; display: inline-block; left: 8px; right: auto; bottom: auto; margin: -34px 0 8px 8px; }
 }
+/* Landscape cards: a drawing on the left and the text across the page, stacked. */
+.rows { display: flex; flex-direction: column; gap: 16px; }
+.card.row { flex-direction: row; align-items: center; gap: 28px; padding: 20px 26px; }
+.row-body { flex: 1; min-width: 0; }
+.row-body h3 { margin-bottom: .25em; }
+.row-body p { margin-bottom: .5em; }
+.pest-art { flex: 0 0 128px; height: 128px; border-radius: 14px; background: var(--bg); border: 1px solid var(--line); display: grid; place-items: center; }
+.alt .pest-art { background: var(--surface); }
+.pest-art-svg { width: 104px; height: 104px; }
+.art-pair { display: flex; }
+.art-pair .pest-art-svg { width: 62px; height: 62px; }
+.species.rows { margin: 48px 0 0; }
+.species .facts { display: grid; grid-template-columns: 1fr 1.6fr 1.6fr; gap: 6px 28px; margin: .3em 0 0; }
+.species .facts dt { margin-top: 0; }
+@media (max-width: 760px) {
+  .card.row { gap: 16px; padding: 16px; align-items: flex-start; }
+  .pest-art { flex-basis: 84px; height: 84px; }
+  .pest-art-svg { width: 70px; height: 70px; }
+  .art-pair .pest-art-svg { width: 40px; height: 40px; }
+  .species .facts { grid-template-columns: 1fr; }
+}

@@ -2,6 +2,19 @@
 // description (Google's snippet, aim for 140-160 characters), and body HTML.
 import { SITE } from "./site.mjs";
 import { barrierMap, rodentMap, termiteMap, serviceAreaMap } from "./maps.mjs";
+import { ant, roach, rodent, termite, building } from "./pestArt.mjs";
+
+/** A landscape card: drawing on the left, title, text and link on the right. */
+const rowCard = (art, title, text, href, more) =>
+  `<div class="card row"><div class="pest-art">${art}</div><div class="row-body"><h3>${title}</h3><p>${text}</p><a class="more" href="${href}">${more}</a></div></div>`;
+
+const ART = {
+  pest: () => `<span class="art-pair">${ant("Ant", { head: "#a8432a", thorax: "#a8432a", gaster: "#4a2418" })}${roach("Cockroach", { body: "#8a3f1a", shield: "#9a4a20", band: "#e8c98a" })}</span>`,
+  rodent: () => rodent("Roof rat", { fur: "#3a332e", ear: 7, tail: 1.25, body: 0.9 }),
+  termite: () => termite("Termite"),
+  condo: () => building("Condo building"),
+};
+
 
 const tel = `<a href="tel:${SITE.phoneE164}">${SITE.phone}</a>`;
 
@@ -65,11 +78,11 @@ const home = {
 
 <section class="block"><div class="wrap">
 <div class="section-head"><h2>Pest control services</h2><p>Integrated pest management: we find the source, treat it, and seal the gaps pests use to get inside, using environmentally responsible products.</p></div>
-<div class="cards">
-<div class="card"><h3>General pest control</h3><p>Interior and exterior service with a perimeter barrier for ants, roaches, spiders and more.</p><a class="more" href="/services/pest-control/">Pest control</a></div>
-<div class="card"><h3>Rodent control</h3><p>Tamper-resistant bait stations, monitoring and exclusion for roof rats and mice.</p><a class="more" href="/services/rodent-control/">Rodent control</a></div>
-<div class="card"><h3>Termite control</h3><p>Inspections and treatment for subterranean and drywood termites.</p><a class="more" href="/services/termite-control/">Termite control</a></div>
-<div class="card"><h3>Condos, HOAs & commercial</h3><p>Ongoing programs set up with property managers and boards.</p><a class="more" href="/condo-hoa-pest-control/">Community programs</a></div>
+<div class="rows">
+${rowCard(ART.pest(), "General pest control", "Interior and exterior service with a perimeter barrier for ants, roaches, spiders and more.", "/services/pest-control/", "Pest control")}
+${rowCard(ART.rodent(), "Rodent control", "Tamper-resistant bait stations, monitoring and exclusion for roof rats and mice.", "/services/rodent-control/", "Rodent control")}
+${rowCard(ART.termite(), "Termite control", "Inspections and treatment for subterranean and drywood termites.", "/services/termite-control/", "Termite control")}
+${rowCard(ART.condo(), "Condos, HOAs &amp; commercial", "Ongoing programs set up with property managers and boards.", "/condo-hoa-pest-control/", "Community programs")}
 </div>
 </div></section>
 
@@ -119,11 +132,11 @@ const services = {
     "Pest, rodent and termite control for communities, businesses and homes across Southwest Florida from a family-owned company with 30+ years in Lee and Collier counties.",
   body: `
 <section class="block"><div class="wrap">
-<div class="cards">
-<div class="card"><h3>General pest control</h3><p>Interior and exterior service with a perimeter barrier treatment around your home or building. Covers ants, cockroaches, spiders, silverfish and other common Florida pests.</p><a class="more" href="/services/pest-control/">Learn more</a></div>
-<div class="card"><h3>Rodent control</h3><p>Tamper-resistant exterior bait stations, interior trapping where needed, monitoring every visit and exclusion work that seals entry points.</p><a class="more" href="/services/rodent-control/">Learn more</a></div>
-<div class="card"><h3>Termite control</h3><p>Inspections and treatment options for subterranean and drywood termites, the two kinds that damage Southwest Florida buildings.</p><a class="more" href="/services/termite-control/">Learn more</a></div>
-<div class="card"><h3>Condos, HOAs &amp; commercial</h3><p>Ongoing programs for associations, clubs, offices and restaurants, with reports for managers and boards.</p><a class="more" href="/condo-hoa-pest-control/">Learn more</a></div>
+<div class="rows">
+${rowCard(ART.pest(), "General pest control", "Interior and exterior service with a perimeter barrier treatment around your home or building. Covers ants, cockroaches, spiders, silverfish and other common Florida pests.", "/services/pest-control/", "Learn more")}
+${rowCard(ART.rodent(), "Rodent control", "Tamper-resistant exterior bait stations, interior trapping where needed, monitoring every visit and exclusion work that seals entry points.", "/services/rodent-control/", "Learn more")}
+${rowCard(ART.termite(), "Termite control", "Inspections and treatment options for subterranean and drywood termites, the two kinds that damage Southwest Florida buildings.", "/services/termite-control/", "Learn more")}
+${rowCard(ART.condo(), "Condos, HOAs &amp; commercial", "Ongoing programs for associations, clubs, offices and restaurants, with reports for managers and boards.", "/condo-hoa-pest-control/", "Learn more")}
 </div>
 </div></section>
 ${ctaBand()}`,
@@ -338,9 +351,31 @@ ${ctaBand("Want your property mapped?", "Call us or send a request and we'll set
 };
 
 /* ------------------------------ pest guide ------------------------------ */
+// Drawing for each species, keyed by card name.
+const SPECIES_ART = {
+  "Ghost ant": () => ant("Ghost ant", { head: "#3a2a20", thorax: "#efe6d6", gaster: "#efe6d6", legs: "#b9ab95", size: 0.75 }),
+  "White-footed ant": () => ant("White-footed ant", { head: "#1f1a17", thorax: "#1f1a17", gaster: "#1f1a17", legs: "#d8c46a", size: 0.85 }),
+  "Red imported fire ant": () => ant("Red imported fire ant", { head: "#a8432a", thorax: "#a8432a", gaster: "#4a2418" }),
+  "Florida carpenter ant": () => ant("Florida carpenter ant", { head: "#c8542a", thorax: "#c8542a", gaster: "#1f1a17", size: 1.15 }),
+  "Big-headed ant": () => ant("Big-headed ant", { head: "#7a4a26", thorax: "#7a4a26", gaster: "#7a4a26", headR: 13, size: 0.9 }),
+  "Tawny crazy ant": () => ant("Tawny crazy ant", { head: "#9a5a2e", thorax: "#9a5a2e", gaster: "#9a5a2e", size: 0.85 }),
+  'American cockroach ("palmetto bug")': () => roach("American cockroach", { body: "#8a3f1a", shield: "#9a4a20", band: "#e8c98a", size: 1.1 }),
+  "German cockroach": () => roach("German cockroach", { body: "#b8833f", shield: "#c4924e", stripes: "#3a2a20", size: 0.75 }),
+  "Smokybrown cockroach": () => roach("Smokybrown cockroach", { body: "#4a2516", shield: "#4a2516" }),
+  "Florida woods roach": () => roach("Florida woods roach", { body: "#2e1d16", shield: "#3a2418", shortWings: true }),
+  "Australian cockroach": () => roach("Australian cockroach", { body: "#8a3f1a", shield: "#9a4a20", band: "#e8c98a", edge: "#e8c24a" }),
+  "Asian cockroach": () => roach("Asian cockroach", { body: "#b8833f", shield: "#c4924e", stripes: "#3a2a20", size: 0.75 }),
+  "Roof rat": () => rodent("Roof rat", { fur: "#3a332e", ear: 7, tail: 1.25, body: 0.9 }),
+  "Norway rat": () => rodent("Norway rat", { fur: "#7a6a5e", ear: 4.5, tail: 0.75, body: 1.1, snout: 0.85 }),
+  "House mouse": () => rodent("House mouse", { fur: "#9a8b7c", ear: 7.5, tail: 0.9, body: 0.65, snout: 0.7 }),
+};
+
 function speciesCards(list) {
-  return `<div class="species">${list
-    .map(([name, size, looks, where]) => `<div class="card"><h3>${name}</h3><dl><dt>Size</dt><dd>${size}</dd><dt>What it looks like</dt><dd>${looks}</dd><dt>Where it's found</dt><dd>${where}</dd></dl></div>`)
+  return `<div class="rows species">${list
+    .map(
+      ([name, size, looks, where]) =>
+        `<div class="card row"><div class="pest-art">${SPECIES_ART[name] ? SPECIES_ART[name]() : ""}</div><div class="row-body"><h3>${name}</h3><dl class="facts"><div><dt>Size</dt><dd>${size}</dd></div><div><dt>What it looks like</dt><dd>${looks}</dd></div><div><dt>Where it's found</dt><dd>${where}</dd></div></dl></div></div>`,
+    )
     .join("")}</div>`;
 }
 
@@ -354,11 +389,11 @@ const pestsIndex = {
     "Identify common Southwest Florida pests: ants, cockroaches, rodents, termites and more. A guide from Resort Pest Control.",
   body: `
 <section class="block"><div class="wrap">
-<div class="cards">
-<div class="card"><h3>Ants</h3><p>Ghost ants, white-footed ants, fire ants, carpenter ants and more.</p><a class="more" href="/pests/ants/">Ant guide</a></div>
-<div class="card"><h3>Cockroaches</h3><p>American "palmetto bugs," German roaches, smokybrown and others.</p><a class="more" href="/pests/cockroaches/">Cockroach guide</a></div>
-<div class="card"><h3>Rodents</h3><p>Roof rats, Norway rats and house mice.</p><a class="more" href="/pests/rodents/">Rodent guide</a></div>
-<div class="card"><h3>Termites</h3><p>Subterranean and drywood termites.</p><a class="more" href="/services/termite-control/">Termites</a></div>
+<div class="rows">
+${rowCard(ant("Ant", { head: "#a8432a", thorax: "#a8432a", gaster: "#4a2418" }), "Ants", "Ghost ants, white-footed ants, fire ants, carpenter ants and more.", "/pests/ants/", "Ant guide")}
+${rowCard(roach("Cockroach", { body: "#8a3f1a", shield: "#9a4a20", band: "#e8c98a" }), "Cockroaches", 'American "palmetto bugs," German roaches, smokybrown and others.', "/pests/cockroaches/", "Cockroach guide")}
+${rowCard(ART.rodent(), "Rodents", "Roof rats, Norway rats and house mice.", "/pests/rodents/", "Rodent guide")}
+${rowCard(ART.termite(), "Termites", "Subterranean and drywood termites.", "/services/termite-control/", "Termites")}
 </div>
 </div></section>
 ${ctaBand("Not sure what you're seeing?", "Send us a photo or give us a call. We'll identify it and tell you what to do.")}`,
@@ -372,7 +407,7 @@ const ants = {
   lede: "Florida is home to dozens of ant species. These are the ones we see most often in Southwest Florida homes and buildings.",
   description:
     "Identify common Southwest Florida ants: ghost ants, white-footed ants, fire ants, carpenter ants and more, and learn how to get rid of them.",
-  body: `<div class="wrap layout"><div class="prose" style="max-width:none">
+  body: `<div class="wrap">
 ${speciesCards([
   ["Ghost ant", "About 1/16 inch", "Tiny, with a dark head and pale, almost see-through legs and body.", "Indoors in kitchens and bathrooms, wall voids and potted plants. Loves sweets."],
   ["White-footed ant", "About 1/8 inch", "Black to dark brown with pale yellowish feet.", "Huge colonies outdoors in trees and landscaping that trail inside along walls and window frames."],
@@ -381,6 +416,8 @@ ${speciesCards([
   ["Big-headed ant", "About 1/8 inch", "Brown; larger workers have oversized heads.", "Nests in soil and under pavers, leaving small piles of dirt along slabs and walks."],
   ["Tawny crazy ant", "About 1/8 inch", "Reddish-brown, moves erratically in huge numbers.", "Outdoors under debris and landscaping; can overwhelm yards and get into electrical boxes."],
 ])}
+</div>
+<div class="wrap layout"><div class="prose" style="max-width:none">
 <h2>Getting rid of ants</h2>
 <p>Store-bought sprays usually just scatter ants and can split colonies. We identify the species, follow the trails to the colony and use baits and treatments that work for that ant. A perimeter barrier then helps keep them from coming back. <a href="/services/pest-control/">See our pest control service</a>.</p>
 </div>${asideBox}</div>
@@ -395,7 +432,7 @@ const roaches = {
   lede: "From outdoor \"palmetto bugs\" to German roaches that breed indoors, here's how to tell them apart.",
   description:
     "Identify cockroaches in Southwest Florida: American (palmetto bugs), German, smokybrown, Florida woods and Australian roaches, and how to stop them.",
-  body: `<div class="wrap layout"><div class="prose" style="max-width:none">
+  body: `<div class="wrap">
 ${speciesCards([
   ["American cockroach (\"palmetto bug\")", "1 1/2 to 2 inches", "Large, reddish-brown, with a pale band behind the head.", "Sewers, drains, mulch and garages. Wanders indoors, especially after rain."],
   ["German cockroach", "1/2 to 5/8 inch", "Light brown with two dark stripes behind the head.", "Kitchens and bathrooms. Breeds indoors fast and spreads between units in multi-family buildings."],
@@ -404,6 +441,8 @@ ${speciesCards([
   ["Australian cockroach", "1 1/4 to 1 1/2 inches", "Like an American roach but with pale yellow stripes along the wing edges.", "Outdoors in plants and mulch; moves into garages and lanais."],
   ["Asian cockroach", "About 1/2 inch", "Looks like a German roach but flies readily.", "Lawns and leaf litter; flies toward lights in the evening."],
 ])}
+</div>
+<div class="wrap layout"><div class="prose" style="max-width:none">
 <h2>Stopping cockroaches</h2>
 <p>Outdoor roaches like palmetto bugs are kept out with a perimeter barrier and sealing entry points. German roaches need a different, indoor-focused plan with baits, especially in condos and restaurants. <a href="/services/pest-control/">See our pest control service</a>.</p>
 </div>${asideBox}</div>
@@ -418,12 +457,14 @@ const rodents = {
   lede: "Roof rats are the most common rodent problem in Southwest Florida. Here's how to recognize the rodents you may see.",
   description:
     "Identify roof rats, Norway rats and house mice in Southwest Florida, the signs of an infestation and how professional rodent control works.",
-  body: `<div class="wrap layout"><div class="prose" style="max-width:none">
+  body: `<div class="wrap">
 ${speciesCards([
   ["Roof rat", "13 to 18 inches including tail", "Slender, dark brown to black, with a tail longer than its body and large ears.", "Palm trees, dense vegetation, attics and roof lines. Excellent climbers."],
   ["Norway rat", "Up to 16 inches including tail", "Heavy-bodied, brownish-gray, with a tail shorter than its body and small ears.", "Burrows in soil along foundations, seawalls and dumpsters."],
   ["House mouse", "5 to 7 inches including tail", "Small, gray-brown, with large ears.", "Inside walls, cabinets and storage areas; can fit through a gap the width of a pencil."],
 ])}
+</div>
+<div class="wrap layout"><div class="prose" style="max-width:none">
 <h2>Signs of rodents</h2>
 <ul><li>Droppings along walls, in cabinets or in the attic</li><li>Gnawed wires, wood or packaging</li><li>Greasy rub marks along beams and walls</li><li>Scratching or scurrying noises at night</li><li>Half-eaten fruit under palms and fruit trees</li></ul>
 <h2>How we control rodents</h2>
