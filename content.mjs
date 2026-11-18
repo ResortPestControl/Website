@@ -27,7 +27,14 @@ const reviewsStrip = () =>
         .map((r) => `<figure class="review"><div class="stars" aria-label="${r.stars} out of 5 stars">${"★".repeat(r.stars)}</div><blockquote>${r.text}</blockquote><figcaption>${r.name}</figcaption></figure>`)
         .join("")}</div>
 </div></section>`
-    : "";
+    : reviewBand();
+
+/** Until there are reviews to show: ask customers for one. */
+const reviewBand = () => `<section class="review-ask"><div class="wrap">
+<span class="stars" aria-hidden="true">★★★★★</span>
+<p><b>Happy with our service?</b> A quick Google review helps other Southwest Florida families and communities find us.</p>
+<a class="btn small green" href="${SITE.reviewUrl}" rel="noopener">Leave us a review</a>
+</div></section>`;
 
 const tel = `<a href="tel:${SITE.phoneE164}">${SITE.phone}</a>`;
 
@@ -629,7 +636,8 @@ const thanks = {
   lede: `We'll be in touch the same business day. Need us sooner? Call ${tel}.`,
   description: "Thanks for contacting Resort Pest Control.",
   noindex: true,
-  body: `<section class="block"><div class="wrap"><a class="btn green" href="/">Back to home</a></div></section>`,
+  body: `<section class="block"><div class="wrap"><a class="btn green" href="/">Back to home</a></div></section>
+${reviewBand()}`,
 };
 
 const privacy = {

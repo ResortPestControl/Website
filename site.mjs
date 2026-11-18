@@ -22,6 +22,8 @@ export const SITE = {
   // TODO(Ryan): the Google Business Profile reviews link, and real reviews copied from it
   // as { name, stars, text }. The reviews strip on the home page stays hidden until there are some.
   googleReviewsUrl: null,
+  // "Leave us a review" on Google (the owner, 2026-11-18).
+  reviewUrl: "https://g.page/r/CS2q9tF67QRfEAE/review",
   reviews: [],
   portal: "https://fieldbook.resortpestcontrol.com/portal",
   portalDemo: "https://fieldbook.resortpestcontrol.com/portal/demo",

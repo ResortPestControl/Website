@@ -85,6 +85,7 @@ function footer() {
 <div><h3>Customers</h3><ul>
 <li><a href="${SITE.portal}">Customer Login</a></li>
 <li><a href="/pay/">Pay a bill</a></li>
+<li><a href="${SITE.reviewUrl}" rel="noopener">Leave us a review</a></li>
 <li><a href="/mapping/">Mapping &amp; Reports</a></li>
 <li><a href="${SITE.portalDemo}">Try the portal demo</a></li>
 <li><a href="${SITE.gorilladesk}">Billing portal (GorillaDesk)</a></li></ul></div>

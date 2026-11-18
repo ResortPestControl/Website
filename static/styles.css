@@ -271,3 +271,7 @@ a.town.on:hover { border-color: var(--green); }
 .review blockquote { margin: 8px 0; color: var(--ink); }
 .review figcaption { font-size: .9rem; color: var(--ink-2); font-weight: 600; }
 @media (max-width: 700px) { .topbar .wrap > span:first-child { display: none; } .topbar .wrap { justify-content: center; } }
+.review-ask { background: #e6efe8; border-block: 1px solid var(--line); padding: 18px 0; }
+.review-ask .wrap { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.review-ask p { margin: 0; flex: 1; min-width: 240px; color: var(--ink); }
+.review-ask .stars { color: #e2a100; font-size: 1.3rem; letter-spacing: 2px; }
