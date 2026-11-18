@@ -2,7 +2,8 @@
 // description (Google's snippet, aim for 140-160 characters), and body HTML.
 import { SITE } from "./site.mjs";
 import { barrierMap, rodentMap, termiteMap, serviceAreaMap } from "./maps.mjs";
-import { ant, roach, rodent, termite, building } from "./pestArt.mjs";
+import { ant, roach, rodent, termite, building, spider, silverfish } from "./pestArt.mjs";
+import { icon, tiles } from "./icons.mjs";
 
 /** A landscape card: drawing on the left, title, text and link on the right. */
 const rowCard = (art, title, text, href, more) =>
@@ -61,23 +62,17 @@ const home = {
 <div>
 <div class="eyebrow">Southwest Florida · Lee &amp; Collier counties</div>
 <h1>Pest control for Southwest Florida communities, businesses and homes</h1>
-<p class="lede">Resort Pest Control is a family-owned Southwest Florida company that has protected Southwest Florida properties for over 30 years. We specialize in condominiums, HOAs and clubs, and we bring the same care to every home.</p>
+<p class="lede">Family-owned for 30+ years. Condos, HOAs, businesses and homes across Lee and Collier counties.</p>
 <div class="actions"><a class="btn" href="tel:${SITE.phoneE164}">Call ${SITE.phone}</a><a class="btn ghost" href="/contact/">Request a free quote</a></div>
 </div>
 <div class="hero-card">
-<h2 style="font-size:1.3rem">Why Southwest Florida properties choose us</h2>
-<ul class="checks">
-<li>Family-owned and local for over 30 years</li>
-<li>Licensed, state-certified technicians</li>
-<li>Every rodent station mapped and checked each visit</li>
-<li>Online portal with reports, maps and invoices</li>
-<li>Free retreats if pests come back inside</li>
-</ul>
+<h2 style="font-size:1.3rem">Why properties choose us</h2>
+${tiles([["family", "Family-owned, 30+ years"], ["badge", "Licensed &amp; state-certified"], ["pin", "Every station mapped"], ["report", "Reports &amp; maps online"], ["shield", "Free retreats"]], "compact")}
 </div>
 </div></section>
 
 <section class="block"><div class="wrap">
-<div class="section-head"><h2>Pest control services</h2><p>Integrated pest management: we find the source, treat it, and seal the gaps pests use to get inside, using environmentally responsible products.</p></div>
+<div class="section-head"><h2>Pest control services</h2></div>
 <div class="rows">
 ${rowCard(ART.pest(), "General pest control", "Interior and exterior service with a perimeter barrier for ants, roaches, spiders and more.", "/services/pest-control/", "Pest control")}
 ${rowCard(ART.rodent(), "Rodent control", "Tamper-resistant bait stations, monitoring and exclusion for roof rats and mice.", "/services/rodent-control/", "Rodent control")}
@@ -90,29 +85,16 @@ ${rowCard(ART.condo(), "Condos, HOAs &amp; commercial", "Ongoing programs set up
 <div>
 <div class="eyebrow">Mapping &amp; reporting</div>
 <h2>See every treatment and station on a map of your property</h2>
-<p>We map each building on your property. At every visit our technician records where the barrier treatment went and what each rodent and termite station shows, and your report puts it all on the map so you can see at a glance what was done and where activity is.</p>
-<ul class="checks"><li>Barrier treatment map</li><li>Rodent station map with feeding levels</li><li>Termite station map with live activity flagged</li><li>Reports and maps in your customer portal</li></ul>
+<p>After every visit, your report shows what was done and where, on a map. Tap a station to see its reading.</p>
+${tiles([["spray", "Barrier map"], ["station", "Rodent stations"], ["pin", "Termite stations"], ["report", "In your portal"]], "two")}
 <div class="actions"><a class="btn green" href="/mapping/">How mapping works</a><a class="btn ghost" href="${SITE.portalDemo}">Try the live demo</a></div>
 </div>
 <div>${rodentMap(true)}</div>
 </div></section>
 
-<section class="block"><div class="wrap split">
-<div>
-<h2>Our approach: integrated pest management</h2>
-<p>Spraying alone doesn't solve pest problems in Southwest Florida's climate. We follow integrated pest management (IPM): find out which pests you have and why, remove what attracts them, keep them out, and treat precisely where it matters.</p>
-<div class="stats">
-<div class="stat"><b>30+ years</b><span>serving Southwest Florida</span></div>
-<div class="stat"><b>Family</b><span>owned and operated in Southwest Florida</span></div>
-<div class="stat"><b>Licensed</b><span>state-certified technicians</span></div>
-</div>
-</div>
-<ol class="steps">
-<li><b>Inspect &amp; identify</b>We find which pests are present, where they're coming from and what's drawing them in.</li>
-<li><b>Prevent</b>We seal entry points and recommend simple changes that make your property less inviting.</li>
-<li><b>Treat</b>Targeted interior and exterior treatments, with a perimeter barrier around the building.</li>
-<li><b>Monitor</b>Regular visits, station checks and reports, so problems are caught early.</li>
-</ol>
+<section class="block"><div class="wrap">
+<div class="section-head"><h2>How we work</h2><p>Find the source, keep pests out, treat only where it matters.</p></div>
+${tiles([["search", "1. Inspect", "Find the pest and its source"], ["seal", "2. Prevent", "Seal the gaps they use"], ["spray", "3. Treat", "Targeted inside and out"], ["chart", "4. Monitor", "Check, record, report"]], "four")}
 </div></section>
 
 <section class="block alt"><div class="wrap">
@@ -164,9 +146,9 @@ function servicePage({ slug, title, h1, lede, description, intro, bullets, secti
     ],
     body: `
 <div class="wrap layout"><div class="prose">
-<p>${intro}</p>
+<p class="lede-sm">${intro}</p>
 <h2>What's included</h2>
-<ul class="checks">${bullets.map((b) => `<li>${b}</li>`).join("")}</ul>
+${tiles(bullets)}
 ${sections}
 ${f ? `<h2>Common questions</h2>${f.html}` : ""}
 </div>${asideBox}</div>
@@ -182,19 +164,25 @@ const pestControl = servicePage({
   description:
     "Interior and exterior pest control with a perimeter barrier for Southwest Florida homes and condos. Free retreats if pests come back inside. Call (239) 352-4100.",
   intro:
-    "Southwest Florida's heat and humidity mean pests are active all year. Our general pest control service treats the inside and outside of your home or building and puts a protective barrier around the whole perimeter, so pests are stopped before they get in.",
+    "Pests are active all year here. We treat inside and out and put a barrier around the whole building.",
   bullets: [
-    "Inspection to identify the pests present and where they enter",
-    "Interior treatment of kitchens, baths, garages and other problem areas",
-    "Exterior perimeter barrier around the entire building",
-    "Treatment of eaves, entry points and landscaping where pests nest",
-    "Recommendations to keep pests from coming back",
-    "Free retreat if live pests appear inside between residential services",
+    ["search", "Inspection", "Which pests, and how they get in"],
+    ["family", "Interior treatment", "Kitchens, baths, garages"],
+    ["spray", "Perimeter barrier", "Around the entire building"],
+    ["palm", "Eaves &amp; landscaping", "Where pests nest"],
+    ["seal", "Prevention tips", "Keep them from coming back"],
+    ["shield", "Free retreats", "If pests come back inside"],
   ],
   sections: `<h2>Pests we treat</h2>
-<p>Ants (including ghost ants, white-footed ants and fire ants), cockroaches, spiders, silverfish, earwigs, millipedes, centipedes, pantry pests and more. Not sure what you're seeing? Our <a href="/pests/">pest identification guide</a> can help.</p>
+<div class="pest-chips">
+<a class="pest-chip" href="/pests/ants/">${ant("Ants", { head: "#a8432a", thorax: "#a8432a", gaster: "#4a2418" })}Ants</a>
+<a class="pest-chip" href="/pests/cockroaches/">${roach("Cockroaches", { body: "#8a3f1a", shield: "#9a4a20", band: "#e8c98a" })}Cockroaches</a>
+<a class="pest-chip" href="/pests/">${spider("Spiders")}Spiders</a>
+<a class="pest-chip" href="/pests/">${silverfish("Silverfish")}Silverfish</a>
+</div>
+<p>Plus earwigs, millipedes, centipedes, pantry pests and more. <a href="/pests/">Pest guide</a></p>
 <h2>Every barrier treatment, on the map</h2>
-<p>For communities and commercial properties, each visit's report shows exactly which buildings got the perimeter barrier and which had interior service. <a href="/mapping/#barrier-map">See how our maps work</a>.</p>
+<p>Each report shows which buildings got the barrier. <a href="/mapping/#barrier-map">How our maps work</a></p>
 ${barrierMap(true)}`,
   faqItems: [
     ["How often should my home be serviced?", "Most Southwest Florida homes do best with regular quarterly service. We'll recommend a schedule after your first inspection."],
@@ -210,17 +198,17 @@ const rodentControl = servicePage({
   description:
     "Rat and mouse control in Southwest Florida: tamper-resistant bait stations, exclusion and visit-by-visit station reports on a map of your property.",
   intro:
-    "Roof rats are the most common rodent problem in Southwest Florida. They live in palm trees and dense landscaping and get into attics, garages and wall voids through surprisingly small gaps. Our rodent program controls the population outside, keeps them out of the building, and tracks activity at every station so you can see results.",
+    "Roof rats live in palms and landscaping and slip in through small gaps. We control them outside, keep them out, and track every station.",
   bullets: [
-    "Inspection for droppings, rub marks, gnawing and entry points",
-    "Locked, tamper-resistant bait stations around buildings",
-    "Every station numbered and pinned on a map of your property",
-    "Activity recorded at each station at every visit",
-    "Exclusion work to seal gaps and openings rodents use",
-    "Reports with the station map in your customer portal",
+    ["search", "Inspection", "Droppings, gnawing, entry points"],
+    ["station", "Locked bait stations", "Tamper-resistant, around buildings"],
+    ["pin", "Every station mapped", "Numbered and pinned"],
+    ["chart", "Checked every visit", "Activity recorded"],
+    ["seal", "Exclusion", "Gaps and openings sealed"],
+    ["report", "Reports with maps", "In your customer portal"],
   ],
   sections: `<h2>See your stations on a map</h2>
-<p>For communities and commercial properties, we draw your buildings and every bait station on an aerial map. Each visit's readings color the map by activity level, so managers and boards can see exactly where rodents are active and how the numbers change over time. <a href="/mapping/">Learn how our mapping works</a>.</p>
+<p>Every station on an aerial map, colored by activity. Tap one to see its reading. <a href="/mapping/">How our maps work</a></p>
 ${rodentMap(true)}`,
   faqItems: [
     ["What are the signs of rats in my home?", "Droppings, gnaw marks on wiring or food packaging, greasy rub marks along walls, chewed fruit outdoors and scratching or running noises in the attic at night."],
@@ -236,18 +224,18 @@ const termiteControl = servicePage({
   description:
     "Termite inspections and treatment in Lee and Collier counties for subterranean and drywood termites. Licensed, family-owned for 30+ years.",
   intro:
-    "Florida has some of the highest termite pressure in the country. Subterranean termites travel from the soil through mud tubes, and drywood termites live entirely inside the wood they eat. Both can do serious damage before you notice. We inspect, identify which kind you have, and recommend the right treatment.",
+    "Florida has some of the highest termite pressure in the country. We find which kind you have and treat it.",
   bullets: [
-    "Thorough inspection of the structure, inside and out",
-    "Identification of subterranean or drywood activity",
-    "Treatment options matched to the type and extent of activity",
-    "Follow-up inspections to confirm the treatment worked",
+    ["search", "Full inspection", "Inside and out"],
+    ["termite", "Identify the type", "Subterranean or drywood"],
+    ["spray", "Matched treatment", "For the type and extent"],
+    ["calendar", "Follow-up", "Confirm it worked"],
   ],
   sections: `<h2>Signs of termites</h2>
-<ul><li>Swarms of winged insects indoors, often in spring</li><li>Discarded wings near windows and doors</li><li>Mud tubes on foundations or walls</li><li>Small piles of pellet-like droppings below wood</li><li>Wood that sounds hollow or blisters</li></ul>
-<p>Seeing any of these? <a href="/contact/">Request a termite inspection</a>.</p>
+${tiles([["wing", "Swarms &amp; wings", "Near windows, often spring"], ["tube", "Mud tubes", "On foundations or walls"], ["droppings", "Pellet droppings", "Below wood"], ["hollow", "Hollow wood", "Sounds hollow or blisters"]])}
+<p>Seeing any of these? <a href="/contact/">Request a termite inspection</a></p>
 <h2>Termite stations on your map</h2>
-<p>For communities and commercial properties, every in-ground termite station is pinned on a map of your property and inspected on schedule. Any live activity is flagged in red on your report. <a href="/mapping/#termite-map">See how our maps work</a>.</p>
+<p>Live activity flagged in red. <a href="/mapping/#termite-map">How our maps work</a></p>
 ${termiteMap(true)}`,
 });
 
@@ -264,29 +252,15 @@ const condo = {
 <section class="block"><div class="wrap split">
 <div>
 <h2>Built for associations</h2>
-<p>Much of our work is for condominium associations, HOAs, country clubs and multi-unit communities. We set up an ongoing program with your property manager and board, service buildings and common areas on a regular schedule, and respond quickly when a resident needs a service call.</p>
-<ul class="checks">
-<li>Scheduled service of buildings, grounds and common areas</li>
-<li>Rodent bait stations mapped and checked every visit</li>
-<li>Perimeter barrier treatments around each building</li>
-<li>Quick-response service calls for individual units</li>
-<li>Reports after every visit, ready for board meetings</li>
-<li>One portal for managers who look after several properties</li>
-</ul>
+<p>An ongoing program set up with your manager and board.</p>
+${tiles([["calendar", "Scheduled service", "Buildings and common areas"], ["station", "Mapped stations", "Checked every visit"], ["spray", "Perimeter barrier", "Around each building"], ["clock", "Quick unit calls", "When a resident needs us"], ["report", "Board-ready reports", "After every visit"], ["building", "One portal", "For all your properties"]])}
 </div>
 <div>${rodentMap(true)}</div>
 </div></section>
 
 <section class="block alt"><div class="wrap">
 <div class="section-head"><h2>The customer portal for managers and boards</h2><p>Every property gets its own portal page, so managers and boards see everything in one place.</p></div>
-<div class="cards">
-<div class="card"><h3>Schedule</h3><p>Upcoming visits for each property.</p></div>
-<div class="card"><h3>Service reports</h3><p>Every published visit report, ready to share with the board.</p></div>
-<div class="card"><h3>Property map</h3><p>Bait stations and their latest activity on an aerial map.</p></div>
-<div class="card"><h3>Invoices &amp; payments</h3><p>Open balances and online payment.</p></div>
-<div class="card"><h3>Service requests</h3><p>Ask for a service call or a new program in a few taps.</p></div>
-<div class="card"><h3>Contacts</h3><p>Keep the right people on your property's account.</p></div>
-</div>
+${tiles([["calendar", "Schedule"], ["report", "Service reports"], ["pin", "Property map"], ["dollar", "Invoices &amp; payments"], ["chat", "Service requests"], ["people", "Contacts"]])}
 <div class="actions"><a class="btn green" href="${SITE.portal}">Customer Login</a><a class="btn ghost" href="${SITE.portalDemo}">Try the demo property</a></div>
 </div></section>
 
@@ -505,18 +479,11 @@ const about = {
     "Resort Pest Control is a family-owned company with 30+ years serving Southwest Florida condos, HOAs, clubs, businesses and homes.",
   body: `
 <div class="wrap layout"><div class="prose">
-<p>For over 30 years, our family-owned and operated company has proudly served the Southwest Florida community. We know Florida's unique pest challenges, and we've built long relationships with the condominiums, homeowners associations, clubs and businesses we protect.</p>
+<p class="lede-sm">Family-owned and local for 30+ years, with long relationships with the condos, HOAs, clubs and businesses we protect.</p>
 <h2>What we believe</h2>
-<ul class="checks">
-<li><b>Prevention first.</b> We follow integrated pest management: identify the pest, remove what attracts it, keep it out and treat precisely.</li>
-<li><b>Environmentally responsible.</b> We use the right product in the right place, not more than needed.</li>
-<li><b>Show our work.</b> Every visit is recorded, and customers see their reports and station maps online.</li>
-<li><b>Stand behind it.</b> If live pests show up inside after a residential treatment, we come back and retreat at no extra charge.</li>
-</ul>
-<h2>Licensed and state-certified</h2>
-<p>Our technicians are licensed and state-certified pest specialists with deep knowledge of Southwest Florida pests.</p>
-<h2>Our technology</h2>
-<p>We built our own field and customer system, FieldBook, so property managers and homeowners can see their schedule, reports, bait-station maps and invoices online. <a href="/mapping/">Learn about our mapping and reporting</a>.</p>
+${tiles([["seal", "Prevention first", "Find the source, keep pests out"], ["leaf", "Responsible", "Right product, right place"], ["report", "Show our work", "Reports and maps online"], ["shield", "Stand behind it", "Free residential retreats"]])}
+<h2>Licensed and certified</h2>
+${tiles([["badge", "State-certified technicians", "Southwest Florida pest specialists"], ["pin", "Our own mapping system", "Built in-house. <a href=\"/mapping/\">See it</a>"]])}
 </div>${asideBox}</div>
 ${ctaBand()}`,
 };

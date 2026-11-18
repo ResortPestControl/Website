@@ -95,3 +95,23 @@ ${windows.join("")}
 <rect x="45" y="74" width="10" height="14" fill="#1d5b3a"/>`,
   );
 }
+
+/** Spider from above: two body parts and eight bent legs. */
+export function spider(label, { body = "#3a2a20" } = {}) {
+  const legs = [[-1, -22, -16], [-1, -26, -4], [1, -26, 8], [1, -22, 20]]
+    .map(([, dx, dy], i) => `<path d="M50 ${42 + i * 3} l${dx / 2} ${dy / 2 - 6} l${dx / 2} ${dy / 2 + 10}"/><path d="M50 ${42 + i * 3} l${-dx / 2} ${dy / 2 - 6} l${-dx / 2} ${dy / 2 + 10}"/>`)
+    .join("");
+  return svg(label, `${legs}<ellipse cx="50" cy="44" rx="8" ry="8" fill="${body}"/><ellipse cx="50" cy="64" rx="12" ry="14" fill="${body}"/><circle cx="47" cy="40" r="1.3" fill="#fff" stroke="none"/><circle cx="53" cy="40" r="1.3" fill="#fff" stroke="none"/>`);
+}
+
+/** Silverfish from above: tapered silvery body, long antennae and three tail bristles. */
+export function silverfish(label) {
+  return svg(
+    label,
+    `<path d="M46 26 C40 14 32 10 24 8 M54 26 C60 14 68 10 76 8" stroke-width="1.4"/>
+<path d="M50 74 L50 92 M48 74 L38 90 M52 74 L62 90" stroke-width="1.4"/>
+<path d="M44 38 l-12 -4 M44 46 l-13 2 M45 54 l-11 7 M56 38 l12 -4 M56 46 l13 2 M55 54 l11 7" stroke-width="1.6"/>
+<path d="M50 24 C60 26 60 40 58 52 C56 64 53 72 50 76 C47 72 44 64 42 52 C40 40 40 26 50 24 Z" fill="#b9c2cc"/>
+<path d="M43 36 Q50 39 57 36 M42 44 Q50 47 58 44 M43 52 Q50 55 57 52 M45 60 Q50 63 55 60" stroke="rgba(0,0,0,.25)" stroke-width="1"/>`,
+  );
+}
